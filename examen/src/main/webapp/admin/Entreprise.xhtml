@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+
+			<h:form id="f1">
+
+
+				<p:dataTable id="tab" value="#{entrepriseBean.list}" var="cand">
+
+
+					<p:column style="width:32px">
+						<p:rowToggler />
+					</p:column>
+
+					<p:column width="10%">
+					<p:graphicImage value="#{cand.logo}" width="50" height="50"></p:graphicImage>
+					</p:column>
+					<p:column headerText="Nom entreprise">
+						<h:outputText value="#{cand.nomEntreprise}" />
+					</p:column>
+
+					<p:column headerText="Email">
+						<h:outputText value="#{cand.email}" />
+					</p:column>
+
+					<p:column headerText="Activer">
+
+						<p:inputSwitch value="#{cand.enabled}" onLabel="Activer"
+							offLabel="Désactiver">
+							<p:ajax listener="#{entrepriseBean.activate(cand)}" />
+						</p:inputSwitch>
+					</p:column>
+
+					<p:rowExpansion>
+						<p:panelGrid columns="2" columnClasses="label,value">
+
+
+							<h:outputText value="Adresse" />
+							<h:outputText value="#{cand.adresse}" />
+
+							<h:outputText value="Téléphone" />
+							<h:outputText value="#{cand.telephone}" />
+
+
+						</p:panelGrid>
+					</p:rowExpansion>
+
+
+
+				</p:dataTable>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

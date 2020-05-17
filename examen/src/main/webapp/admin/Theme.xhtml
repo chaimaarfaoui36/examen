@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+			<h:form id="f1">
+
+				<p:commandLink styleClass="btn btn-success" process="@this"
+					onclick="PF('dlg').show()" update="panel"
+					action="#{themeBean.clickAdd()}" style="float:right">
+					<i class="fas fa-plus"></i>
+					Nouveau Thème
+					</p:commandLink>
+
+				<br />
+				<br />
+
+				<p:dataTable id="tab" value="#{themeBean.list}" var="theme">
+					<p:column headerText="Libelle">
+						<h:outputText value="#{theme.libelle}" />
+					</p:column>
+					<p:column headerText="Opération" width="20%">
+						<p:spacer width="20"></p:spacer>
+						<p:commandLink id="btnDelete" styleClass="btn btn-danger"
+							title="Supprimer" style="color:white" process="@this"
+							action="#{themeBean.supprimer()}" update="tab">
+							<i class="fas fa-trash"></i>
+							<f:setPropertyActionListener value="#{theme}"
+								target="#{themeBean.theme}" />
+							<p:confirm header="Confirmation"
+								message="Vous etes sur de supprimer?"
+								icon="pi pi-exclamation-triangle" />
+						</p:commandLink>
+						<p:spacer width="20"></p:spacer>
+						<p:commandLink id="btnEdit" styleClass="btn btn-warning"
+							process="@this" onclick="PF('dlg').show()" update="f1:panel"
+							title="Editer" style="color:white"
+							action="#{themeBean.clickEdit()}">
+							<i class="fas fa-edit"></i>
+							<f:setPropertyActionListener value="#{theme}"
+								target="#{themeBean.theme}" />
+						</p:commandLink>
+					</p:column>
+
+
+				</p:dataTable>
+
+
+
+				<p:dialog header="Thème" widgetVar="dlg" modal="true"
+					resizable="false">
+
+					<h:panelGrid columns="2" id="panel">
+						<h:outputText value="Libelle" />
+
+						<p:inputText value="#{themeBean.theme.libelle}" required="true"
+							requiredMessage="Libelle réquis"></p:inputText>
+
+						<p:commandButton value="Ajouter" rendered="#{themeBean.btnAdd}"
+							action="#{themeBean.ajouter()}"
+							oncomplete="validForm(xhr, status, args)" update="tab"></p:commandButton>
+
+						<p:commandButton value="Modifier" rendered="#{themeBean.btnEdit}"
+							action="#{themeBean.modifier()}"
+							oncomplete="validForm(xhr, status, args)" update="tab"></p:commandButton>
+
+						<p:commandButton value="Annuler" onclick="PF('dlg').hide()"
+							process="@this"></p:commandButton>
+
+					</h:panelGrid>
+
+				</p:dialog>
+
+
+
+				<script type="text/javascript">
+    function validForm(xhr, status, args) {
+        if(args.validationFailed || !args.valid) {
+            PF('dlg').jq.effect("shake", {times:5}, 100);
+        }
+        else {
+            PF('dlg').hide();
+            $('#loginLink').fadeOut();
+        }
+    }
+</script>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

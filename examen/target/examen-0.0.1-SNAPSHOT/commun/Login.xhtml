@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http:// java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<link rel="stylesheet" href="../assets/css/all.min.css" />
+
+	<link rel="stylesheet" href="../assets/css/ionicons.min.css" />
+
+	<link rel="stylesheet" href="../assets/css/adminlte.min.css" />
+	<link href="../assets/css/css.css" rel="stylesheet" />
+</h:head>
+<body class="login-page">
+	<div class="login-box">
+		<div class="login-logo">
+			<a><b>ANT Technology</b></a>
+		</div>
+		<!-- /.login-logo -->
+		<div class="card">
+			<div class="card-body login-card-body">
+				<p class="login-box-msg">Merci de s'authentifier</p>
+
+				<form action="../j_spring_security_check" method="post">
+					<h:inputHidden value="#{connexionBean.error}"></h:inputHidden>
+					<p:growl showDetail="true">
+						<p:autoUpdate></p:autoUpdate>
+					</p:growl>
+					<div class="input-group mb-3">
+						<p:inputText id="j_username" class="form-control"
+							placeholder="Email" />
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-envelope"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<p:inputText id="j_password" type="password" class="form-control"
+							placeholder="Mot de passe" />
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-7"></div>
+						<!-- /.col -->
+						<div class="col-5">
+							<button type="submit" class="btn btn-primary btn-block">Se
+								connecter</button>
+						</div>
+						<!-- /.col -->
+					</div>
+				</form>
+				<h:form>
+					<div class="social-auth-links text-center mb-3">
+						<p>- Ou -</p>
+						<h:commandLink class="btn btn-block btn-primary"
+							action="RegisterCandidat">
+							<i class="fa fa-user mr-2"></i> Inscription candidat
+					</h:commandLink>
+						<h:commandLink class="btn btn-block btn-danger"
+							action="RegisterEntreprise">
+							<i class="fa fa-building mr-2"></i>Inscription entreprise
+					</h:commandLink>
+					</div>
+					<!-- /.social-auth-links -->
+
+
+
+				</h:form>
+
+
+			</div>
+			<!-- /.login-card-body -->
+		</div>
+	</div>
+</body>
+</html>

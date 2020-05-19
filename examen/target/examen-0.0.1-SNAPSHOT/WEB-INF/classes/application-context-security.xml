@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+
+	<security:http pattern="/faces/commun/**" security="none"></security:http>
+
+	<security:http use-expressions="true">
+		<security:csrf disabled="true" />
+		<security:intercept-url
+			pattern="/faces/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url
+			pattern="/faces/candidat/**" access="hasRole('ROLE_CANDIDAT')" />
+
+		<security:intercept-url
+			pattern="/faces/entreprise/**" access="hasRole('ROLE_ENTREPRISE')" />
+
+		<security:form-login
+			login-processing-url="/faces/j_spring_security_check"
+			login-page="/faces/commun/Login.xhtml"
+			default-target-url="/faces/shared/Index.xhtml"
+			authentication-failure-url="/faces/commun/Login.xhtml?error=1"
+			username-parameter="j_username" password-parameter="j_password" />
+
+		<security:access-denied-handler
+			error-page="/faces/shared/AccessDenied.xhtml" />
+	
+	<security:logout
+	logout-url="/logout"
+	 logout-success-url="/faces/commun/Login.xhtml"/>
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="userService">
+
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+
+	<bean id="userService"
+		class="com.ant.examen.services.UsersService"></bean>
+</beans>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<link rel="stylesheet" href="../assets/css/all.min.css" />
+
+	<link rel="stylesheet" href="../assets/css/ionicons.min.css" />
+
+	<link rel="stylesheet" href="../assets/css/adminlte.min.css" />
+	<link href="../assets/css/css.css" rel="stylesheet" />
+
+</h:head>
+<body class="hold-transition register-page">
+	<h:form>
+		<p:growl showDetail="true">
+			<p:autoUpdate></p:autoUpdate>
+		</p:growl>
+		<div class="register-box">
+			<div class="card">
+				<div class="card-body ">
+					<p class="login-box-msg">Inscription candidat</p>
+
+
+					<div class="input-group mb-3">
+						<p:inputText class="form-control" placeholder="Nom et prénom"
+							value="#{candidatBean.candidat.nom}" required="true"
+							requiredMessage="Nom et prénom réquis" />
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="input-group mb-3">
+						<p:inputText class="form-control"
+							placeholder="Carte Nationale d'identité"
+							value="#{candidatBean.candidat.cin}" maxlength="8"
+							required="true" requiredMessage="CIN réquis">
+							<p:keyFilter regEx="/[\d]/"></p:keyFilter>
+						</p:inputText>
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fa fa-address-card"></span>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="input-group mb-3">
+						<p:inputText class="form-control" placeholder="Adresse"
+							value="#{candidatBean.candidat.adresse}" required="true"
+							requiredMessage="Adresse réquis">
+
+						</p:inputText>
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fa fa-home"></span>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="input-group mb-3">
+						<p:inputMask class="form-control" placeholder="Téléphone"
+							required="true" requiredMessage="Téléphone réquis"
+							value="#{candidatBean.candidat.telephone}"
+							mask="(999) 99-999-999" />
+
+
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fa fa-phone"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-group mb-3">
+						<p:inputText class="form-control" placeholder="Email"
+							required="true" requiredMessage="Email réquis"
+							value="#{candidatBean.candidat.email}"
+							validatorMessage="Email invalid">
+							<p:keyFilter regEx="/[a-z0-9_\.\-@]/i"></p:keyFilter>
+
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-envelope"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<p:inputText type="password" class="form-control"
+							placeholder="Mot de passe"
+							value="#{candidatBean.candidat.password}" required="true"
+							requiredMessage="Mot de passe réquis" />
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<p:inputText type="password" class="form-control" required="true"
+							requiredMessage="Confirmer Mot de passe réquis"
+							placeholder="Confirmer mot de passe"
+							value="#{candidatBean.confirmPwd}" />
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-8"></div>
+						<!-- /.col -->
+						<div class="col-4">
+							<p:commandLink class="btn btn-primary btn-block"
+								action="#{candidatBean.register()}">S'inscrir</p:commandLink>
+						</div>
+						<!-- /.col -->
+					</div>
+
+
+					<div class="social-auth-links text-center">
+
+						<p:commandLink action="Login" process="@this" class="text-center">
+						Se connecter à un compte existant
+						
+						</p:commandLink>
+					</div>
+					<!-- /.form-box -->
+				</div>
+				<!-- /.card -->
+			</div>
+		</div>
+	</h:form>
+</body>
+</html>

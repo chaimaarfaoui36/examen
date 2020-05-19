@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" href="../assets/css/all.min.css" />
+
+	<link rel="stylesheet" href="../assets/css/ionicons.min.css" />
+
+	<link rel="stylesheet" href="../assets/css/adminlte.min.css" />
+	<link href="../assets/css/css.css" rel="stylesheet" />
+<style>
+
+.ui-growl {
+  
+    top: 80px;
+   
+}
+</style>
+</h:head>
+<body class="sidebar-mini" style="height: auto;">
+	<div class="wrapper">
+		<p:growl showDetail="true">
+			<p:autoUpdate></p:autoUpdate>
+		</p:growl>
+		<ui:include src="/facelets/Header.xhtml" />
+		<ui:include src="/facelets/SideBar.xhtml" />
+
+
+		<div class="content-wrapper" style="min-height: 1589.56px;">
+			<!-- Content Header (Page header) -->
+			<section class="content-header"></section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="card">
+
+					<div class="card-body">
+						<ui:insert name="content"></ui:insert>
+					</div>
+
+				</div>
+				<!-- /.card -->
+
+			</section>
+			<!-- /.content -->
+		</div>
+
+		<ui:include src="/facelets/Footer.xhtml" />
+		
+		
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+        <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+    </p:confirmDialog>      
+	</div>
+
+	<!-- 	<script src="../assets/js/jquery.min.js"></script> -->
+	<!-- Bootstrap 4 -->
+	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="../assets/js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="../assets/js/demo.js"></script>
+</body>
+</html>

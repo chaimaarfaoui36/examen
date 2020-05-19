@@ -30,10 +30,13 @@
    <PROCESS-ITEM-OUTPUT ID="Entreprise::#admin#Entreprise.xhtml"
     NAME="output7" PATH="/admin/Entreprise.xhtml"
     TARGET="rules:#admin#Entreprise.xhtml" TITLE="Entreprise" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Password::#shared#Password.xhtml"
+    NAME="output8" PATH="/shared/Password.xhtml"
+    TARGET="rules:#shared#Password.xhtml" TITLE="Password" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#admin#Question.xhtml"
-  PATH="/admin/Question.xhtml" SHAPE="696,88,50,25"
+  PATH="/admin/Question.xhtml" SHAPE="640,88,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#admin#ListQuestion.xhtml"
   PATH="/admin/ListQuestion.xhtml" SHAPE="712,128,50,25"
@@ -44,15 +47,18 @@
   PATH="/commun/Login.xhtml" SHAPE="304,33,0,0"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#commun#RegisterCandidat.xhtml"
-  PATH="/commun/RegisterCandidat.xhtml" SHAPE="454,56,0,0"
+  PATH="/commun/RegisterCandidat.xhtml" SHAPE="480,56,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#admin#Candidat.xhtml"
-  PATH="/admin/Candidat.xhtml" SHAPE="488,248,50,25"
+  PATH="/admin/Candidat.xhtml" SHAPE="432,208,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#commun#RegisterEntreprise.xhtml"
-  PATH="/commun/RegisterEntreprise.xhtml" SHAPE="648,56,50,25"
+  PATH="/commun/RegisterEntreprise.xhtml" SHAPE="672,24,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#admin#Entreprise.xhtml"
-  PATH="/admin/Entreprise.xhtml" SHAPE="461,290,0,0"
+  PATH="/admin/Entreprise.xhtml" SHAPE="456,256,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#shared#Password.xhtml"
+  PATH="/shared/Password.xhtml" SHAPE="592,328,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>

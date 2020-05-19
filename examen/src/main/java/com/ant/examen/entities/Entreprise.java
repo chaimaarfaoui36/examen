@@ -8,8 +8,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Entreprise extends Users {
 	
-	private String nomEntreprise;
-	private String logo;
+	
+	
 	@OneToMany(mappedBy = "entreprise")
 	private List<Examen> examens;
 
@@ -21,21 +21,8 @@ public class Entreprise extends Users {
 		this.examens = examens;
 	}
 
-	public String getNomEntreprise() {
-		return nomEntreprise;
-	}
 
-	public void setNomEntreprise(String nomEntreprise) {
-		this.nomEntreprise = nomEntreprise;
-	}
 
-	public String getLogo() {
-		return logo;
-	}
 
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
-	
 	
 }

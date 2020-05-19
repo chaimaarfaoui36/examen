@@ -50,7 +50,7 @@ public class EntrepriseBean {
 			if (file.getSize() != 0) {
 				if (confirmPwd.equals(entreprise.getPassword())) {
 					String url = flickrService.uploadImage(file.getInputstream(), file.getFileName());
-					entreprise.setLogo(url);
+					entreprise.setImage(url);
 					MessageResponse result = entrepriseService.register(entreprise);
 					if (result.isSuccess()) {
 						FacesContext.getCurrentInstance().addMessage(null,

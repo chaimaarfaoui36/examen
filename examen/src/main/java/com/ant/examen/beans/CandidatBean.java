@@ -8,9 +8,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.model.UploadedFile;
+
 import com.ant.examen.entities.Candidat;
 import com.ant.examen.model.MessageResponse;
 import com.ant.examen.services.CandidatService;
+import com.ant.examen.services.FlickrService;
 
 @ManagedBean
 @ViewScoped
@@ -20,6 +23,8 @@ public class CandidatBean {
 	private Candidat candidat = new Candidat();
 	private CandidatService candidatService = new CandidatService();
 	private String confirmPwd;
+	private UploadedFile file;
+	private FlickrService flickrService = new FlickrService();
 
 	public void activate(Candidat cand) {
 		try {
@@ -41,21 +46,26 @@ public class CandidatBean {
 
 	public String register() {
 		try {
-
-			if (confirmPwd.equals(candidat.getPassword())) {
-
-				MessageResponse result = candidatService.register(candidat);
-				if (result.isSuccess()) {
-					FacesContext.getCurrentInstance().addMessage(null,
-							new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", result.getMessage()));
-					return "Login";
+			if (file.getSize() != 0) {
+				if (confirmPwd.equals(candidat.getPassword())) {
+					String url = flickrService.uploadImage(file.getInputstream(), file.getFileName());
+					candidat.setImage(url);
+					MessageResponse result = candidatService.register(candidat);
+					if (result.isSuccess()) {
+						FacesContext.getCurrentInstance().addMessage(null,
+								new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", result.getMessage()));
+						return "Login";
+					} else {
+						FacesContext.getCurrentInstance().addMessage(null,
+								new FacesMessage(FacesMessage.SEVERITY_WARN, "Attention", result.getMessage()));
+					}
 				} else {
-					FacesContext.getCurrentInstance().addMessage(null,
-							new FacesMessage(FacesMessage.SEVERITY_WARN, "Attention", result.getMessage()));
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Attention", "Les mots de passe ne sont pas identiques"));
 				}
 			} else {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-						"Attention", "Les mots de passe ne sont pas identiques"));
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention", "Logo réquis"));
 			}
 
 		} catch (Exception e) {
@@ -63,6 +73,7 @@ public class CandidatBean {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Opération non effectuée"));
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 
@@ -94,6 +105,14 @@ public class CandidatBean {
 
 	public void setConfirmPwd(String confirmPwd) {
 		this.confirmPwd = confirmPwd;
+	}
+
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	public void setFile(UploadedFile file) {
+		this.file = file;
 	}
 
 }

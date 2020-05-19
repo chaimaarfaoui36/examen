@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Candidat extends Users {
 	private String cin;
-	private String nom;
+	
 	@OneToMany(mappedBy = "candidat")
 	private List<Participation> participations;
 	public String getCin() {
@@ -17,12 +17,7 @@ public class Candidat extends Users {
 	public void setCin(String cin) {
 		this.cin = cin;
 	}
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+	
 	public List<Participation> getParticipations() {
 		return participations;
 	}

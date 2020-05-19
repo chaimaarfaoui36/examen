@@ -16,7 +16,7 @@
 
 </h:head>
 <body class="hold-transition register-page">
-	<h:form>
+	<h:form  enctype="multipart/form-data">
 		<p:growl showDetail="true">
 			<p:autoUpdate></p:autoUpdate>
 		</p:growl>
@@ -119,12 +119,20 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="input-group mb-3">
+						<p:fileUpload value="#{candidatBean.file}" mode="simple"
+							skinSimple="true"  label="Image" />
+
+					</div>
+					
+					
 					<div class="row">
 						<div class="col-8"></div>
 						<!-- /.col -->
 						<div class="col-4">
-							<p:commandLink class="btn btn-primary btn-block"
-								action="#{candidatBean.register()}">S'inscrir</p:commandLink>
+							<h:commandLink class="btn btn-primary btn-block"
+								action="#{candidatBean.register()}">S'inscrir</h:commandLink>
 						</div>
 						<!-- /.col -->
 					</div>

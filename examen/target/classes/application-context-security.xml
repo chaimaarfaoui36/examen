@@ -27,20 +27,26 @@
 
 		<security:access-denied-handler
 			error-page="/faces/shared/AccessDenied.xhtml" />
-	
-	<security:logout
-	logout-url="/logout"
-	 logout-success-url="/faces/commun/Login.xhtml"/>
+
+		<security:logout logout-url="/logout"
+			logout-success-url="/faces/commun/Login.xhtml" />
 	</security:http>
-	
+
 	<security:authentication-manager>
+
 		<security:authentication-provider
 			user-service-ref="userService">
-
+			<security:password-encoder
+				ref="passwordEncoder"></security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
 
 
 	<bean id="userService"
 		class="com.ant.examen.services.UsersService"></bean>
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg value="12"></constructor-arg>
+	</bean>
 </beans>

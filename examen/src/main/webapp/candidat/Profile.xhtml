@@ -1,0 +1,86 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+
+			<h:form>
+				<div class="form-group row">
+					<label class="col-sm-3 col-form-label">Nom et prénom</label>
+					<div class="col-sm-6">
+						<p:inputText class="form-control" placeholder="Nom et prénom"
+							value="#{adminProfilBean.admin.nom}" required="true"
+							requiredMessage="Nom et prénom réquis" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-3 col-form-label">Carte Nationale d'identité</label>
+					<div class="col-sm-6">
+						<p:inputText class="form-control"
+							placeholder="Carte Nationale d'identité"
+							value="#{adminProfilBean.admin.cin}" maxlength="8"
+							required="true" requiredMessage="CIN réquis">
+							<p:keyFilter regEx="/[\d]/"></p:keyFilter>
+						</p:inputText>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-3 col-form-label">Adresse</label>
+					<div class="col-sm-6">
+						<p:inputText class="form-control" placeholder="Adresse"
+							value="#{adminProfilBean.admin.adresse}" required="true"
+							requiredMessage="Adresse réquis">
+
+						</p:inputText>
+					</div>
+				</div>
+				
+				
+					<div class="form-group row">
+					<label class="col-sm-3 col-form-label">Télphone</label>
+					<div class="col-sm-6">
+						<p:inputMask class="form-control" placeholder="Téléphone"
+							required="true" requiredMessage="Téléphone réquis"
+							value="#{adminProfilBean.admin.telephone}"
+							mask="(999) 99-999-999" />
+					</div>
+				</div>
+				
+				
+				<div class="form-group row">
+					<label class="col-sm-3 col-form-label">Email</label>
+					<div class="col-sm-6">
+							<p:inputText class="form-control" placeholder="Email"
+							required="true" requiredMessage="Email réquis"
+							value="#{adminProfilBean.admin.email}"
+							validatorMessage="Email invalid">
+							<p:keyFilter regEx="/[a-z0-9_\.\-@]/i"></p:keyFilter>
+
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+					</div>
+				</div>
+				
+				<hr />
+				<div class="row">
+					<div class="col-10"></div>
+					<div class="col-2">
+						<p:commandLink value="Valider" styleClass="btn btn-success btn-block"
+							action="#{adminProfilBean.updateProfil()}"></p:commandLink>
+					</div>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

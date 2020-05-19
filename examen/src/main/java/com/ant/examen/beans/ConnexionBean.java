@@ -1,54 +1,90 @@
 package com.ant.examen.beans;
 
-import java.io.Serializable;
+import java.util.Map;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.ant.examen.entities.Administrateur;
-import com.ant.examen.entities.Candidat;
-import com.ant.examen.entities.Entreprise;
 import com.ant.examen.entities.Users;
+import com.ant.examen.services.UsersService;
 
 @ManagedBean
 @SessionScoped
-public class ConnexionBean implements Serializable {
+public class ConnexionBean {
 
+	private String userConnected;
+	private UsersService userService = new UsersService();
+	private boolean admin, candidat, entreprise;
+	private String role;
+	private String photo;
 	private String error;
+	private boolean showError;
 
-	public String getProfil() {
+	public ConnexionBean() {
+
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public String getUserConnected() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Users user = (Users) authentication.getPrincipal();
+		String username = authentication.getName();
+		Users user = (Users) userService.loadUserByUsername(username);
+		if (user != null) {
 
-		if (user instanceof Administrateur) {
-			return "Administrateur";
-		} else if (user instanceof Candidat) {
-			Candidat candidat = (Candidat) user;
-			return candidat.getNom();
-		} else if (user instanceof Entreprise) {
-			Entreprise entreprise = (Entreprise) user;
-			return entreprise.getNomEntreprise();
+			userConnected = user.getNom();
+
 		}
 
-		return null;
+		for (GrantedAuthority authority : authentication.getAuthorities()) {
+			if (authority.getAuthority().equalsIgnoreCase("ROLE_ADMIN")) {
+				admin = true;
+				candidat = false;
+				entreprise = false;
+				role = "Adminsitratuer";
+			} else if (authority.getAuthority().equalsIgnoreCase("ROLE_CANDIDAT")) {
+				admin = false;
+				candidat = true;
+				entreprise = false;
+				role = "Candidat";
+			} else if (authority.getAuthority().equalsIgnoreCase("ROLE_ENTREPRISE")) {
+				admin = false;
+				candidat = false;
+				entreprise = true;
+				role = "Entreprise";
+			}
+		}
+
+		return userConnected;
+	}
+
+	public void setUserConnected(String userConnected) {
+		this.userConnected = userConnected;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getError() {
 
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
-		String id = request.getParameter("error");
-		if (id != null) {
-			if (Integer.parseInt(id) == 1) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-						"Attention", "Merci de verifier votre email ou mot de passe"));
-			}
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map<String, String> paramMap = context.getExternalContext().getRequestParameterMap();
+		String result = paramMap.get("error");
+
+		if (result != null && result.equals("1")) {
+			showError = true;
 		}
 
 		return error;
@@ -56,6 +92,44 @@ public class ConnexionBean implements Serializable {
 
 	public void setError(String error) {
 		this.error = error;
+	}
+
+	public boolean isShowError() {
+		return showError;
+	}
+
+	public void setShowError(boolean showError) {
+		this.showError = showError;
+	}
+
+	public boolean isCandidat() {
+		return candidat;
+	}
+
+	public void setCandidat(boolean candidat) {
+		this.candidat = candidat;
+	}
+
+	public boolean isEntreprise() {
+		return entreprise;
+	}
+
+	public void setEntreprise(boolean entreprise) {
+		this.entreprise = entreprise;
+	}
+
+	public String getPhoto() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		Users user = (Users) userService.loadUserByUsername(username);
+		if (user != null) {
+			photo = user.getImage();
+		}
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 }

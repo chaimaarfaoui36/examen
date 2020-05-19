@@ -23,12 +23,13 @@ public class Users implements Serializable, UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	private String nom;
 	private String email;
 	private String password;
 	private String adresse;
 	private String telephone;
 	private boolean enabled;
-
+	private String image;
 	public Integer getId() {
 		return id;
 	}
@@ -76,6 +77,16 @@ public class Users implements Serializable, UserDetails {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
+	
 
 	@Transient
 	@Override
@@ -120,5 +131,16 @@ public class Users implements Serializable, UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	
+	
 
 }

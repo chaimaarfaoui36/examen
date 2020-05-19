@@ -31,17 +31,21 @@
 							<i class="fa fa-user-alt"></i>
 							Mon profil</h:commandLink>
 						<div class="dropdown-divider"></div>
-						<h:commandLink class="dropdown-item ">
+						<h:commandLink action="Password" class="dropdown-item ">
 							<i class="fa fa-lock"></i>
 						Modifier mot de passe</h:commandLink>
 						<div class="dropdown-divider"></div>
 					</h:form>
 
-					<h:outputLink
-						value="#{facesContext.externalContext.request.contextPath}/logout"
-						class="dropdown-item ">
-						<i class="fa fa-sign-out-alt"></i>
-							Déconnexion</h:outputLink>
+					
+
+					<form name="form" action="${request.contextPath}/logout"
+						method="post">
+						<a class="dropdown-item " onclick="form.submit()"> <i class="fa fa-sign-out-alt"></i>
+							Déconnexion
+						</a>
+					</form>
+
 				</div></li>
 			<!-- Notifications Dropdown Menu -->
 

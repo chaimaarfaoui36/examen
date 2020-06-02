@@ -6,23 +6,25 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" href="../assets/css/all.min.css" />
-
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
+	<!-- Ionicons -->
 	<link rel="stylesheet" href="../assets/css/ionicons.min.css" />
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../assets/css/AdminLTE.min.css" />
 
-	<link rel="stylesheet" href="../assets/css/adminlte.min.css" />
-	<link href="../assets/css/css.css" rel="stylesheet" />
-<style>
-
+	<link rel="stylesheet" href="../assets/css/_all-skins.min.css" />
+	<link rel="stylesheet" href="../assets/css/font.css" />
+	<style>
 .ui-growl {
-  
-    top: 80px;
-   
+	top: 80px;
 }
 </style>
 </h:head>
-<body class="sidebar-mini" style="height: auto;">
-	<div class="wrapper">
+<body class="skin-blue sidebar-mini"
+	style="height: auto; min-height: 100%;">
+	<div style="height: auto; min-height: 100%;">
 		<p:growl showDetail="true">
 			<p:autoUpdate></p:autoUpdate>
 		</p:growl>
@@ -30,42 +32,54 @@
 		<ui:include src="/facelets/SideBar.xhtml" />
 
 
-		<div class="content-wrapper" style="min-height: 1589.56px;">
+
+		<div class="content-wrapper" style="min-height: 1136px;">
 			<!-- Content Header (Page header) -->
-			<section class="content-header"></section>
+
 
 			<!-- Main content -->
 			<section class="content">
 
 				<!-- Default box -->
-				<div class="card">
+				<div class="box">
 
-					<div class="card-body">
+					<div class="box-body">
 						<ui:insert name="content"></ui:insert>
 					</div>
+					<!-- /.box-body -->
 
+					<!-- /.box-footer-->
 				</div>
-				<!-- /.card -->
+				<!-- /.box -->
 
 			</section>
 			<!-- /.content -->
 		</div>
 
+
+
 		<ui:include src="/facelets/Footer.xhtml" />
-		
-		
+
+
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-        <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-        <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-    </p:confirmDialog>      
+			<p:commandButton value="Oui" type="button"
+				styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+			<p:commandButton value="Non" type="button"
+				styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+		</p:confirmDialog>
 	</div>
 
-	<!-- 	<script src="../assets/js/jquery.min.js"></script> -->
-	<!-- Bootstrap 4 -->
-	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/js/jquery.min.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<!-- SlimScroll -->
+	<script src="../assets/js/jquery.slimscroll.min.js"></script>
+	<!-- FastClick -->
+	<script src="../assets/js/fastclick.js"></script>
 	<!-- AdminLTE App -->
 	<script src="../assets/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="../assets/js/demo.js"></script>
+	
 </body>
 </html>

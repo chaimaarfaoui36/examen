@@ -9,95 +9,70 @@
 <body>
 	<h:form>
 
-		<aside class="main-sidebar elevation-4 sidebar-light-primary">
-			<!-- Brand Logo -->
-			<a href="index.html" class="brand-link navbar-success"> <img
-				src="../assets/img/Logo.png" alt="AdminLTE Logo"
-				class="brand-image img-circle elevation-3" style="opacity: .8" /><span
-				class="brand-text font-weight-light" style="color: white">ANT
-					Technology</span>
-			</a>
-
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional) -->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="image">
-						<img src="#{connexionBean.photo}"
-							class="img-circle elevation-2" alt="User Image" />
+		<aside class="main-sidebar">
+			<!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar" style="height: auto;">
+				<!-- Sidebar user panel -->
+				<div class="user-panel">
+					<div class="pull-left image">
+						<img src="#{connexionBean.photo}" class="img-circle"
+							alt="User Image" />
 					</div>
-					<div class="info">
-						<a href="#" class="d-block">
-						#{connexionBean.userConnected}
-						</a>
+					<div class="pull-left info">
+						<p>#{connexionBean.userConnected}</p>
+
 					</div>
 				</div>
+				<!-- search form -->
 
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column"
-						data-widget="treeview" role="menu" data-accordion="false">
-						<!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+				<!-- /.search form -->
+				<!-- sidebar menu: : style can be found in sidebar.less -->
+				<ul class="sidebar-menu tree" data-widget="tree">
 
-						<li class="nav-item has-treeview"><a href="#"
-							class="nav-link"> <i class="nav-icon fas fa-users"></i>
-								<p>
-									Gestion des utilisateurs <i class="right fas fa-angle-left"></i>
-								</p>
-						</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item"><p:commandLink action="Candidat"
-										styleClass="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Liste des candidats</p>
-									</p:commandLink></li>
-								<li class="nav-item"><p:commandLink action="Entreprise"
-										styleClass="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Liste des entreprises</p>
-									</p:commandLink></li>
-
-							</ul></li>
-
-
-						<li class="nav-item has-treeview"><a href="#"
-							class="nav-link"> <i class="nav-icon fas fa-tachometer-alt"></i>
-								<p>
-									Gestion des questions <i class="right fas fa-angle-left"></i>
-								</p>
-						</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item"><p:commandLink action="ListQuestion"
-										styleClass="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Liste des questions</p>
-									</p:commandLink></li>
-								<li class="nav-item"><p:commandLink action="Question"
-										styleClass="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Nouvelle question</p>
-									</p:commandLink></li>
-
-							</ul></li>
-
-
-
-
-						<li class="nav-item"><p:commandLink action="Theme"
-								styleClass="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>Gestion des thèmes</p>
-							</p:commandLink></li>
+					<li class=" treeview"><a href="#"> <i class="fa fa-users"></i>
+							<span>Gestion utilisateurs</span> <span
+							class="pull-right-container"> <i
+								class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+						<ul class="treeview-menu" style="display: none;">
+							<li class="active"><h:commandLink action="Candidat">
+									<i class="fa fa-circle-o"></i> Liste des candidats</h:commandLink></li>
+							<li><h:commandLink action="Entreprise">
+									<i class="fa fa-circle-o"></i> Liste des entreprises</h:commandLink></li>
+						</ul></li>
+						
+						
+						
+						<li class=" treeview"><a href="#"> <i class="fa fa-tachometer"></i>
+							<span>Gestion des questions</span> <span
+							class="pull-right-container"> <i
+								class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+						<ul class="treeview-menu" style="display: none;">
+							<li class="active"><h:commandLink action="ListQuestion">
+									<i class="fa fa-circle-o"></i> Liste des questions</h:commandLink></li>
+							<li><h:commandLink action="Question">
+									<i class="fa fa-circle-o"></i> Nouvelle question</h:commandLink></li>
+						</ul></li>
 
 
 
 
 
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
+
+
+
+
+
+
+
+
+
+
+				</ul>
+			</section>
 			<!-- /.sidebar -->
 		</aside>
 

@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
 
-	<security:http pattern="/faces/commun/**" security="none"></security:http>
+	<security:http pattern="/faces/auth/**" security="none"></security:http>
 
 	<security:http use-expressions="true">
 		<security:csrf disabled="true" />
@@ -20,16 +20,16 @@
 
 		<security:form-login
 			login-processing-url="/faces/j_spring_security_check"
-			login-page="/faces/commun/Login.xhtml"
+			login-page="/faces/auth/Login.xhtml"
 			default-target-url="/faces/shared/Index.xhtml"
-			authentication-failure-url="/faces/commun/Login.xhtml?error=1"
+			authentication-failure-url="/faces/auth/Login.xhtml?error=1"
 			username-parameter="j_username" password-parameter="j_password" />
 
 		<security:access-denied-handler
 			error-page="/faces/shared/AccessDenied.xhtml" />
 
 		<security:logout logout-url="/logout"
-			logout-success-url="/faces/commun/Login.xhtml" />
+			logout-success-url="/faces/auth/Login.xhtml" />
 	</security:http>
 
 	<security:authentication-manager>

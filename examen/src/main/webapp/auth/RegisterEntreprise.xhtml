@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="../assets/css/ionicons.min.css" />
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../assets/css/AdminLTE.min.css" />
+
+	<link rel="stylesheet" href="../assets/css/_all-skins.min.css" />
+	<link rel="stylesheet" href="../assets/css/font.css" />
+
+</h:head>
+<body class="hold-transition register-page">
+	<h:form enctype="multipart/form-data">
+		<p:growl showDetail="true">
+			<p:autoUpdate></p:autoUpdate>
+		</p:growl>
+		<div class="register-box">
+			<div class="register-box-body">
+
+				<p class="login-box-msg">Inscription entreprise</p>
+
+
+				<div class="form-group has-feedback">
+					<p:inputText class="form-control" placeholder="Nom Entreprise"
+						value="#{entrepriseBean.entreprise.nom}" required="true"
+						requiredMessage="Nom Entreprise réquis" />
+
+					<span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
+
+
+				</div>
+
+
+
+
+
+				<div class="form-group has-feedback">
+					<p:inputText class="form-control" placeholder="Adresse"
+						value="#{entrepriseBean.entreprise.adresse}" required="true"
+						requiredMessage="Adresse réquis">
+
+					</p:inputText>
+
+					<span class="glyphicon glyphicon-home form-control-feedback"></span>
+
+				</div>
+
+
+				<div class="form-group has-feedback">
+					<p:inputMask class="form-control" placeholder="Téléphone"
+						required="true" requiredMessage="Téléphone réquis"
+						value="#{entrepriseBean.entreprise.telephone}"
+						mask="(999) 99-999-999" />
+
+
+
+					<span class="glyphicon glyphicon-phone form-control-feedback"></span>
+
+				</div>
+
+				<div class="form-group has-feedback">
+					<p:inputText class="form-control" placeholder="Email"
+						required="true" requiredMessage="Email réquis"
+						value="#{entrepriseBean.entreprise.email}"
+						validatorMessage="Email invalid">
+						<p:keyFilter regEx="/[a-z0-9_\.\-@]/i"></p:keyFilter>
+
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+
+					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+				</div>
+				<div class="form-group has-feedback">
+					<p:inputText type="password" class="form-control"
+						placeholder="Mot de passe"
+						value="#{entrepriseBean.entreprise.password}" required="true"
+						requiredMessage="Mot de passe réquis" />
+
+					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+				</div>
+				<div class="form-group has-feedback">
+					<p:inputText type="password" class="form-control" required="true"
+						requiredMessage="Confirmer Mot de passe réquis"
+						placeholder="Confirmer mot de passe"
+						value="#{entrepriseBean.confirmPwd}" />
+
+					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+				</div>
+
+				<div class="form-group has-feedback">
+					<p:fileUpload value="#{entrepriseBean.file}" mode="simple"
+						skinSimple="true" label="Image" />
+
+				</div>
+
+
+				<div class="row">
+					<div class="col-8"></div>
+					<!-- /.col -->
+					<div class="col-4">
+						<h:commandLink class="btn btn-primary btn-block"
+							action="#{entrepriseBean.register()}">S'inscrir</h:commandLink>
+					</div>
+					<!-- /.col -->
+				</div>
+
+
+				<div class="social-auth-links text-center">
+
+					<p:commandLink action="Login" process="@this" class="text-center">
+						Se connecter à un compte existant
+						
+						</p:commandLink>
+				</div>
+				<!-- /.form-box -->
+			</div>
+			<!-- /.card -->
+		</div>
+
+	</h:form>
+
+
+	<!-- 		<script src="../assets/js/jquery.min.js"></script> -->
+	<!-- Bootstrap 3.3.7 -->
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<!-- SlimScroll -->
+	<script src="../assets/js/jquery.slimscroll.min.js"></script>
+	<!-- FastClick -->
+	<script src="../assets/js/fastclick.js"></script>
+	<!-- AdminLTE App -->
+	<script src="../assets/js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="../assets/js/demo.js"></script>
+</body>
+</html>

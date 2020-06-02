@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http:// java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="../assets/css/ionicons.min.css" />
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../assets/css/AdminLTE.min.css" />
+
+	<link rel="stylesheet" href="../assets/css/_all-skins.min.css" />
+	<link rel="stylesheet" href="../assets/css/font.css" />
+</h:head>
+<body class="hold-transition login-page">
+	<div class="login-box">
+		<div class="login-logo">
+			<a href="../../index2.html"><b>ANT</b>Technology</a>
+		</div>
+		<!-- /.login-logo -->
+		<div class="login-box-body">
+			<p class="login-box-msg">Merci de s'authentifier</p>
+
+			<form action="../j_spring_security_check" method="post">
+				<div class="form-group has-feedback">
+					<input name="j_username" type="email" class="form-control"
+						placeholder="Email" id="j_username" /> <span
+						class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+				</div>
+				<div class="form-group has-feedback">
+					<input name="j_password" type="password" class="form-control"
+						placeholder="Mot de passe" /> <span
+						class="glyphicon glyphicon-lock form-control-feedback"></span>
+				</div>
+				<div class="row">
+					<div class="col-xs-8"></div>
+					<!-- /.col -->
+					<div class="col-xs-4">
+						<button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
+					</div>
+					<!-- /.col -->
+				</div>
+			</form>
+
+			<div class="social-auth-links text-center">
+				<p>- Ou -</p>
+				<h:form>
+					<h:commandLink action="RegisterCandidat"
+						class="btn btn-block btn-social btn-facebook btn-flat">
+						<i class="fa fa-user"></i> Inscription Candidat</h:commandLink>
+					<h:commandLink action="RegisterEntreprise"
+						class="btn btn-block btn-social btn-google btn-flat">
+						<i class="fa fa-building"></i> Inscription Entreprise</h:commandLink>
+
+				</h:form>
+			</div>
+			<!-- /.social-auth-links -->
+
+
+
+
+		</div>
+		<!-- /.login-box-body -->
+	</div>
+	<!-- /.login-box -->
+
+
+	<script src="../assets/js/jquery.min.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<!-- SlimScroll -->
+	<script src="../assets/js/jquery.slimscroll.min.js"></script>
+	<!-- FastClick -->
+	<script src="../assets/js/fastclick.js"></script>
+	<!-- AdminLTE App -->
+	<script src="../assets/js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="../assets/js/demo.js"></script>
+</body>
+</html>

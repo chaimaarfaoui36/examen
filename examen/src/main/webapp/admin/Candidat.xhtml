@@ -14,6 +14,11 @@
 					<p:column style="width:32px">
 						<p:rowToggler />
 					</p:column>
+					
+					<p:column width="10%">
+					<p:graphicImage value="#{cand.image}" width="50" height="50"></p:graphicImage>
+					</p:column>
+					
 					<p:column headerText="CIN" width="15%">
 						<h:outputText value="#{cand.cin}" />
 					</p:column>
@@ -34,7 +39,7 @@
 					</p:column>
 
 					<p:rowExpansion>
-						<p:panelGrid columns="2" columnClasses="label,value">
+						<p:panelGrid columns="2" >
 
 
 							<h:outputText value="Adresse" />

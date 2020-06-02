@@ -33,7 +33,7 @@ public class AdminProfilBean {
 
 	public void updateProfil() {
 		try {
-			if (file.getSize() > 0) {
+			if (file != null && file.getSize() > 0) {
 				String url = flickrService.uploadImage(file.getInputstream(), file.getFileName());
 				admin.setImage(url);
 			}

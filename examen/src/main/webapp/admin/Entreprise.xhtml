@@ -21,10 +21,10 @@
 					</p:column>
 
 					<p:column width="10%">
-					<p:graphicImage value="#{cand.logo}" width="50" height="50"></p:graphicImage>
+					<p:graphicImage value="#{cand.image}" width="50" height="50"></p:graphicImage>
 					</p:column>
 					<p:column headerText="Nom entreprise">
-						<h:outputText value="#{cand.nomEntreprise}" />
+						<h:outputText value="#{cand.nom}" />
 					</p:column>
 
 					<p:column headerText="Email">
@@ -40,7 +40,7 @@
 					</p:column>
 
 					<p:rowExpansion>
-						<p:panelGrid columns="2" columnClasses="label,value">
+						<p:panelGrid columns="2" >
 
 
 							<h:outputText value="Adresse" />

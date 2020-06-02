@@ -8,8 +8,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Entreprise extends Users {
 	
-	
-	
 	@OneToMany(mappedBy = "entreprise")
 	private List<Examen> examens;
 

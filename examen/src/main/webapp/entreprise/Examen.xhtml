@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+			<h:form id="f1">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="box box-secondary">
+							<div class="box-header">
+								<h3 class="box-title">Examen</h3>
+							</div>
+							<div class="box-body">
+								<div class="col-sm-10">
+									<div class="form-group">
+
+
+
+										<label>Libellé</label>
+
+
+										<p:inputText styleClass="form-control col-sm-8"
+											value="#{examenBean.examen.libelle}" required="true"
+											requiredMessage="Libellé réquis"></p:inputText>
+
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<div class="form-group">
+
+
+
+										<label>Date Début</label>
+
+
+										<p:calendar required="true"
+											requiredMessage="Date début réquis" pattern="dd/MM/yyyy"
+											value="#{examenBean.examen.dateCreation}"
+											mindate="#{examenBean.minDate}">
+											<p:ajax event="dateSelect"
+												listener="#{examenBean.onDateSelect}" update="date2" />
+										</p:calendar>
+
+									</div>
+								</div>
+
+
+								<div class="col-sm-5">
+									<div class="form-group">
+
+
+
+										<label>Date Fin</label>
+
+
+										<p:calendar id="date2" pattern="dd/MM/yyyy" required="true"
+											requiredMessage="Date fin réquis"
+											mindate="#{examenBean.minDateFin}"
+											value="#{examenBean.examen.dateExpiration}"></p:calendar>
+
+									</div>
+								</div>
+
+							</div>
+							<div class="box-footer">
+								<p:commandLink styleClass="btn btn-success col-sm-4 pull-right"
+									rendered="#{examenBean.btnAdd}" update="@form"
+									action="#{examenBean.ajouter()}">
+								
+									Ajouter
+								</p:commandLink>
+
+
+
+								<p:commandLink styleClass="btn btn-warning col-sm-4 pull-right"
+									rendered="#{examenBean.btnEdit}" update="@form"
+									action="#{examenBean.modifier()}">
+								
+									Modifier
+								</p:commandLink>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</h:form>
+
+
+
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

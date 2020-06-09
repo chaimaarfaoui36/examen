@@ -9,12 +9,15 @@
 <body>
 	<ui:composition template="/facelets/Template.xhtml">
 		<ui:define name="content">
+			<div class="box box-secondary">
+							
+							<div class="box-body">
 			<h:form id="f1">
 
 				<p:commandLink styleClass="btn btn-success" process="@this"
 					onclick="PF('dlg').show()" update="panel"
 					action="#{themeBean.clickAdd()}" style="float:right">
-					<i class="fas fa-plus"></i>
+					<i class="fa fa-plus"></i>
 					Nouveau Thème
 					</p:commandLink>
 
@@ -30,7 +33,7 @@
 						<p:commandLink id="btnDelete" styleClass="btn btn-danger"
 							title="Supprimer" style="color:white" process="@this"
 							action="#{themeBean.supprimer()}" update="tab">
-							<i class="fas fa-trash"></i>
+							<i class="fa fa-trash"></i>
 							<f:setPropertyActionListener value="#{theme}"
 								target="#{themeBean.theme}" />
 							<p:confirm header="Confirmation"
@@ -42,7 +45,7 @@
 							process="@this" onclick="PF('dlg').show()" update="f1:panel"
 							title="Editer" style="color:white"
 							action="#{themeBean.clickEdit()}">
-							<i class="fas fa-edit"></i>
+							<i class="fa fa-edit"></i>
 							<f:setPropertyActionListener value="#{theme}"
 								target="#{themeBean.theme}" />
 						</p:commandLink>
@@ -92,6 +95,8 @@
 </script>
 
 			</h:form>
+			</div>
+			</div>
 		</ui:define>
 	</ui:composition>
 </body>

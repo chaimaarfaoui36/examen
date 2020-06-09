@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+			<div class="box box-secondary">
+
+				<div class="box-body">
+					<h:form id="f1">
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Thème</label>
+							<div class="col-sm-10">
+								<h:selectOneMenu value="#{affectQuestionBean.theme.id}"
+									styleClass="form-control">
+									<f:selectItem itemLabel="Choisir thème" />
+									<f:selectItems value="#{themeBean.list}" var="theme"
+										itemLabel="#{theme.libelle}" itemValue="#{theme.id}" />
+
+									<f:ajax event="change"
+										listener="#{affectQuestionBean.changeTheme}" render="tab"></f:ajax>
+
+								</h:selectOneMenu>
+
+							</div>
+						</div>
+
+
+						<p:dataTable id="tab" value="#{affectQuestionBean.questions}"
+							var="question"
+							selection="#{affectQuestionBean.selectedQuestions}"
+							rowKey="#{question.id}">
+							
+							<p:column selectionMode="multiple"
+								style="width:30px;text-align:center" />
+
+							<p:column style="width:35px">
+								<p:rowToggler />
+							</p:column>
+
+							<p:column headerText="Libelle">
+								<h:outputText value="#{question.libelle}" />
+							</p:column>
+
+							<p:column headerText="Multi choix" width="20%">
+								<h:outputText
+									value="#{question.multiChoice eq 'true'? 'Oui': 'Non'}" />
+							</p:column>
+
+							<p:rowExpansion>
+								<p:dataTable value="#{affectQuestionBean.getReponse(question)}"
+									var="rep">
+									<p:column headerText="Réponse">
+										<h:outputText value="#{rep.libelle}" />
+									</p:column>
+
+									<p:column headerText="Correcte" width="20%">
+										<h:outputText value="#{rep.correct eq 'true'? 'Oui': 'Non'}" />
+									</p:column>
+
+								</p:dataTable>
+
+
+							</p:rowExpansion>
+
+						</p:dataTable>
+
+
+
+
+
+
+
+
+					</h:form>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

@@ -9,75 +9,79 @@
 <body>
 	<ui:composition template="/facelets/Template.xhtml">
 		<ui:define name="content">
+			<div class="box box-secondary">
 
-			<h:form enctype="multipart/form-data">
-				<div class="form-group row">
-					<label class="col-sm-3 col-form-label">Nom Entreprise</label>
-					<div class="col-sm-6">
-						<p:inputText class="form-control" placeholder="Nom entreprise"
-							value="#{entrepriseProfilBean.entreprise.nom}" required="true"
-							requiredMessage="Nom Entreprise réquis" />
-					</div>
-				</div>
-
-
-				<div class="form-group row">
-					<label class="col-sm-3 col-form-label">Adresse</label>
-					<div class="col-sm-6">
-						<p:inputText class="form-control" placeholder="Adresse"
-							value="#{entrepriseProfilBean.entreprise.adresse}"
-							required="true" requiredMessage="Adresse réquis">
-
-						</p:inputText>
-					</div>
-				</div>
+				<div class="box-body">
+					<h:form enctype="multipart/form-data">
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label">Nom Entreprise</label>
+							<div class="col-sm-6">
+								<p:inputText class="form-control" placeholder="Nom entreprise"
+									value="#{entrepriseProfilBean.entreprise.nom}" required="true"
+									requiredMessage="Nom Entreprise réquis" />
+							</div>
+						</div>
 
 
-				<div class="form-group row">
-					<label class="col-sm-3 col-form-label">Télphone</label>
-					<div class="col-sm-6">
-						<p:inputMask class="form-control" placeholder="Téléphone"
-							required="true" requiredMessage="Téléphone réquis"
-							value="#{entrepriseProfilBean.entreprise.telephone}"
-							mask="(999) 99-999-999" />
-					</div>
-				</div>
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label">Adresse</label>
+							<div class="col-sm-6">
+								<p:inputText class="form-control" placeholder="Adresse"
+									value="#{entrepriseProfilBean.entreprise.adresse}"
+									required="true" requiredMessage="Adresse réquis">
+
+								</p:inputText>
+							</div>
+						</div>
 
 
-				<div class="form-group row">
-					<label class="col-sm-3 col-form-label">Email</label>
-					<div class="col-sm-6">
-						<p:inputText class="form-control" placeholder="Email"
-							required="true" requiredMessage="Email réquis"
-							value="#{entrepriseProfilBean.entreprise.email}"
-							validatorMessage="Email invalid">
-							<p:keyFilter regEx="/[a-z0-9_\.\-@]/i"></p:keyFilter>
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label">Télphone</label>
+							<div class="col-sm-6">
+								<p:inputMask class="form-control" placeholder="Téléphone"
+									required="true" requiredMessage="Téléphone réquis"
+									value="#{entrepriseProfilBean.entreprise.telephone}"
+									mask="(999) 99-999-999" />
+							</div>
+						</div>
 
-							<f:validateRegex
-								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-						</p:inputText>
-					</div>
-				</div>
 
-				<div class="form-group row">
-					<label class="col-sm-3 col-form-label">Photo</label>
-					<div class="col-sm-6">
-						<p:fileUpload value="#{entrepriseProfilBean.file}" mode="simple"
-							skinSimple="true" label="Image" />
-					</div>
-				</div>
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label">Email</label>
+							<div class="col-sm-6">
+								<p:inputText class="form-control" placeholder="Email"
+									required="true" requiredMessage="Email réquis"
+									value="#{entrepriseProfilBean.entreprise.email}"
+									validatorMessage="Email invalid">
+									<p:keyFilter regEx="/[a-z0-9_\.\-@]/i"></p:keyFilter>
 
-				
+									<f:validateRegex
+										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+								</p:inputText>
+							</div>
+						</div>
 
-				<div class="box-footer">
-					<h:commandLink value="Modifier profile"
-						styleClass="btn btn-success col-sm-4
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label">Photo</label>
+							<div class="col-sm-6">
+								<p:fileUpload value="#{entrepriseProfilBean.file}" mode="simple"
+									skinSimple="true" label="Image" />
+							</div>
+						</div>
+
+
+
+						<div class="box-footer">
+							<h:commandLink value="Modifier profile"
+								styleClass="btn btn-success col-sm-4
 						 pull-right"
-						action="#{entrepriseProfilBean.updateProfil()}"></h:commandLink>
+								action="#{entrepriseProfilBean.updateProfil()}"></h:commandLink>
+						</div>
+
+
+					</h:form>
 				</div>
-
-
-			</h:form>
+			</div>
 		</ui:define>
 	</ui:composition>
 </body>

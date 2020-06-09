@@ -9,6 +9,9 @@
 <body>
 	<ui:composition template="/facelets/Template.xhtml">
 		<ui:define name="content">
+			<div class="box box-secondary">
+							
+							<div class="box-body">
 			<h:form id="f1">
 				<p:dataTable id="tab" value="#{candidatBean.list}" var="cand">
 					<p:column style="width:32px">
@@ -57,7 +60,8 @@
 				</p:dataTable>
 
 			</h:form>
-
+</div>
+</div>
 		</ui:define>
 	</ui:composition>
 </body>

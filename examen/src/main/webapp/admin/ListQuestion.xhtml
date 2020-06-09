@@ -9,7 +9,9 @@
 <body>
 	<ui:composition template="/facelets/Template.xhtml">
 		<ui:define name="content">
-
+	<div class="box box-secondary">
+							
+							<div class="box-body">
 			<h:form id="f1">
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Thème</label>
@@ -44,7 +46,7 @@
 						<p:commandLink id="btnDelete" styleClass="btn btn-danger"
 							title="Supprimer" style="color:white" process="@this"
 							update="tab" action="#{questionBean.supprimer()}">
-							<i class="fas fa-trash"></i>
+							<i class="fa fa-trash"></i>
 							<f:setPropertyActionListener value="#{question}"
 								target="#{questionBean.question}" />
 							<p:confirm header="Confirmation"
@@ -55,7 +57,7 @@
 						<a id="btnEdit" class="btn btn-warning"
 							 title="Editer" style="color:white"
 							href="Question.xhtml?id=#{question.id}">
-							<i class="fas fa-edit"></i>
+							<i class="fa fa-edit"></i>
 
 						
 						</a>
@@ -72,6 +74,8 @@
 
 
 			</h:form>
+			</div>
+			</div>
 		</ui:define>
 	</ui:composition>
 </body>

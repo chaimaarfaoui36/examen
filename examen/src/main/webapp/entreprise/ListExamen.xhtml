@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+	<div class="box box-secondary">
+							
+							<div class="box-body">
+			<h:form id="f1">
+			
+
+
+				<p:dataTable id="tab" value="#{examenBean.list}"
+					var="exam">
+					<p:column headerText="Libelle">
+						<h:outputText value="#{exam.libelle}" />
+					</p:column>
+
+					<p:column headerText="Date Début">
+						<h:outputText value="#{exam.dateCreation}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
+						</h:outputText>
+					</p:column>
+					
+						<p:column headerText="Date Fin">
+						<h:outputText value="#{exam.dateExpiration}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Opération" width="20%">
+						<p:spacer width="20"></p:spacer>
+						<p:commandLink id="btnDelete" styleClass="btn btn-danger"
+							title="Supprimer" style="color:white" process="@this"
+							update="tab" action="#{examenBean.supprimer()}">
+							<i class="fa fa-trash"></i>
+							<f:setPropertyActionListener value="#{exam}"
+								target="#{examenBean.examen}" />
+							<p:confirm header="Confirmation"
+								message="Vous etes sur de supprimer?"
+								icon="pi pi-exclamation-triangle" />
+						</p:commandLink>
+						<p:spacer width="20"></p:spacer>
+						<a id="btnEdit" class="btn btn-warning"
+							 title="Editer" style="color:white"
+							href="Examen.xhtml?id=#{exam.id}">
+							<i class="fa fa-edit"></i>
+						</a>
+						
+						<p:spacer width="20"></p:spacer>
+						<a id="btnEdit" class="btn btn-primary"
+							 title="Affecter Questions" style="color:white"
+							href="AffectQuestion.xhtml?id=#{exam.id}">
+							<i class="fa fa-share"></i>
+						</a>
+					</p:column>
+
+
+				</p:dataTable>
+
+
+
+
+
+
+
+
+			</h:form>
+			</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

@@ -15,8 +15,8 @@ public class Test {
 //	Theme theme = new Theme();
 //	theme.setLibelle("Java");
 //	
-//	ThemeDao themeDao = new ThemeDao();
-//	themeDao.save(theme);
+	ThemeDao themeDao = new ThemeDao();
+	themeDao.findAll();
 
 	}
 

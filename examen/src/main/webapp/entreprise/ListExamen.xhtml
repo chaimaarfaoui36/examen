@@ -33,6 +33,9 @@
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
 						</h:outputText>
 					</p:column>
+					<p:column headerText="Durée">
+					<h:outputText value="#{exam.duree}" />
+					</p:column>
 					<p:column headerText="Opération" width="20%">
 						<p:spacer width="20"></p:spacer>
 						<p:commandLink id="btnDelete" styleClass="btn btn-danger"

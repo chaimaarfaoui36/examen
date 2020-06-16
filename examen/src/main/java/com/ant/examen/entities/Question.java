@@ -21,8 +21,8 @@ public class Question implements Serializable {
 	private boolean multiChoice;
 	@ManyToOne
 	private Theme theme;
-	@ManyToMany
-	private List<Examen> examens;
+	@OneToMany(mappedBy = "question")
+	private List<QuestionExamen> questionExamens;
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Reponse> reponses;
 	@OneToMany(mappedBy = "question")
@@ -57,12 +57,22 @@ public class Question implements Serializable {
 		this.theme = theme;
 	}
 
-	public List<Examen> getExamens() {
-		return examens;
+	
+
+	public List<ReponseCandidat> getReponseCandidats() {
+		return reponseCandidats;
 	}
 
-	public void setExamens(List<Examen> examens) {
-		this.examens = examens;
+	public void setReponseCandidats(List<ReponseCandidat> reponseCandidats) {
+		this.reponseCandidats = reponseCandidats;
+	}
+
+	public List<QuestionExamen> getQuestionExamens() {
+		return questionExamens;
+	}
+
+	public void setQuestionExamens(List<QuestionExamen> questionExamens) {
+		this.questionExamens = questionExamens;
 	}
 
 	public List<Reponse> getReponses() {

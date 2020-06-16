@@ -32,22 +32,30 @@
 
 
 						<p:dataTable id="tab" value="#{affectQuestionBean.questions}"
-							var="question"
+							var="question" rowIndexVar="index"
 							selection="#{affectQuestionBean.selectedQuestions}"
-							rowKey="#{question.id}">
-							
-							<p:column selectionMode="multiple"
+							rowKey="#{question.id}"
+							>
+							<p:ajax event="toggleSelect"
+								listener="#{affectQuestionBean.toggleSeelet}" />
+
+							<p:ajax event="rowSelectCheckbox"
+								listener="#{affectQuestionBean.onRowSelect}" />
+							<p:ajax event="rowUnselectCheckbox"
+								listener="#{affectQuestionBean.onRowUnselect}" />
+
+							<p:column selectionMode="multiple" 
 								style="width:30px;text-align:center" />
 
-							<p:column style="width:35px">
+							<p:column style="width:35px" selectRow="false">
 								<p:rowToggler />
 							</p:column>
 
-							<p:column headerText="Libelle">
+							<p:column headerText="Libelle" selectRow="false">
 								<h:outputText value="#{question.libelle}" />
 							</p:column>
 
-							<p:column headerText="Multi choix" width="20%">
+							<p:column headerText="Multi choix" width="20%" selectRow="false">
 								<h:outputText
 									value="#{question.multiChoice eq 'true'? 'Oui': 'Non'}" />
 							</p:column>
@@ -69,13 +77,6 @@
 							</p:rowExpansion>
 
 						</p:dataTable>
-
-
-
-
-
-
-
 
 					</h:form>
 				</div>

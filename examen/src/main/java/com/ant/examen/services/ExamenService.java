@@ -6,13 +6,19 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import com.ant.examen.dao.ExamenDao;
+import com.ant.examen.dao.QuestionExamenDao;
 import com.ant.examen.entities.Entreprise;
 import com.ant.examen.entities.Examen;
+import com.ant.examen.entities.Question;
+import com.ant.examen.entities.QuestionExamen;
+import com.ant.examen.entities.QuestionExamenId;
+import com.ant.examen.entities.Theme;
 import com.ant.examen.model.MessageResponse;
 
 public class ExamenService {
 
 	private ExamenDao examenDao = new ExamenDao();
+	private QuestionExamenDao questionExamenDao = new QuestionExamenDao();
 
 	public MessageResponse save(Examen examen) {
 
@@ -32,6 +38,7 @@ public class ExamenService {
 		examenDao.delete(examen);
 		return new MessageResponse(true, "Opération effectuée avec succès");
 	}
+
 	public MessageResponse update(Examen examen) {
 
 		Criterion crit1 = Restrictions.idEq(examen.getId());
@@ -44,8 +51,7 @@ public class ExamenService {
 		examenDao.update(examen);
 		return new MessageResponse(true, "Opération effectuée avec succès");
 	}
-	
-	
+
 	public List<Examen> findByEntreprise(Entreprise entreprise) {
 		Criterion crit = Restrictions.eq("entreprise", entreprise);
 		return examenDao.findByCriteria(crit);
@@ -53,10 +59,45 @@ public class ExamenService {
 
 	public Examen findById(Integer idQ) {
 		Criterion crit = Restrictions.idEq(idQ);
-		List<Examen> examens = examenDao.findByCriteria(crit );
-		if(!examens.isEmpty()) {
+		List<Examen> examens = examenDao.findByCriteria(crit);
+		if (!examens.isEmpty()) {
 			return examens.get(0);
 		}
 		return null;
 	}
+
+	
+	public void addQuestion(Question question, Examen examen) {
+
+		Criterion crit = Restrictions.eq("question", question);
+		List<QuestionExamen> list = questionExamenDao.findByCriteria(crit);
+		if (list.isEmpty()) {
+			QuestionExamen questionExamen = new QuestionExamen();
+			QuestionExamenId questionExamenId = new QuestionExamenId();
+			questionExamenId.setExamensId(examen.getId());
+			questionExamenId.setQuestionsId(question.getId());
+			questionExamen.setId(questionExamenId);
+			questionExamenDao.save(questionExamen);
+		}
+
+	}
+
+	public void removeQuestion(Question question, Examen examen) {
+
+		QuestionExamen questionExamen = new QuestionExamen();
+		QuestionExamenId questionExamenId = new QuestionExamenId();
+		questionExamenId.setExamensId(examen.getId());
+		questionExamenId.setQuestionsId(question.getId());
+		questionExamen.setId(questionExamenId);
+		questionExamenDao.delete(questionExamen);
+	}
+
+	public void deletQuestionByTheme(Theme theme,Examen examen) {
+		
+	List<QuestionExamen> list = questionExamenDao.findByThemeExamen(theme, examen);
+		list.forEach(qe -> {
+			questionExamenDao.delete(qe);
+		});
+	}
+
 }

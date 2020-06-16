@@ -10,6 +10,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
+
 import com.ant.examen.entities.Examen;
 import com.ant.examen.entities.Question;
 import com.ant.examen.entities.Reponse;
@@ -33,12 +36,17 @@ public class AffectQuestionBean {
 	@PostConstruct
 	public void init() {
 
-		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		id = params.get("id");
-		if (id != null) {
-			Integer idQ = Integer.valueOf(id);
-			examen = examenService.findById(idQ);
-
+		try {
+			Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+			id = params.get("id");
+			if (id != null) {
+				Integer idQ = Integer.valueOf(id);
+				examen = examenService.findById(idQ);
+				selectedQuestions = questionService.findByExamen(examen);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
@@ -47,13 +55,38 @@ public class AffectQuestionBean {
 		try {
 			if (theme.getId() != null) {
 				questions = questionService.findByTheme(theme);
+				selectedQuestions = questionService.findByExamen(examen);
 			} else {
 				questions = new ArrayList<>();
+				selectedQuestions = null;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void toggleSeelet() {
+		try {
+			System.out.println(selectedQuestions.isEmpty());
+			if(selectedQuestions.isEmpty()) {
+				examenService.deletQuestionByTheme(theme, examen);
+			}else {
+				selectedQuestions.forEach(quest -> {
+					examenService.addQuestion(quest, examen);
+				});
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void onRowSelect(SelectEvent evt) {
+		examenService.addQuestion(((Question)evt.getObject()), examen);
+	}
+	
+	public void onRowUnselect(UnselectEvent evt) {
+		examenService.removeQuestion(((Question)evt.getObject()), examen);
 	}
 
 	public List<Reponse> getReponse(Question question) {

@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.ant.examen.dao.QuestionDao;
 import com.ant.examen.dao.ReponseDao;
+import com.ant.examen.entities.Examen;
 import com.ant.examen.entities.Question;
 import com.ant.examen.entities.Reponse;
 import com.ant.examen.entities.Theme;
@@ -30,7 +31,7 @@ public class QuestionService {
 
 	public MessageResponse update(Question question) {
 		Criterion crit1 = Restrictions.idEq(question.getId());
-		Criterion crit2 = Restrictions.isNotEmpty("examens");
+		Criterion crit2 = Restrictions.isNotEmpty("questionExamens");
 
 		Criterion crit = Restrictions.and(crit1, crit2);
 		List<Question> list = questionDao.findByCriteria(crit);
@@ -50,7 +51,7 @@ public class QuestionService {
 
 	public MessageResponse delete(Question question) {
 		Criterion crit1 = Restrictions.idEq(question.getId());
-		Criterion crit2 = Restrictions.isNotEmpty("examens");
+		Criterion crit2 = Restrictions.isNotEmpty("questionExamens");
 
 		Criterion crit = Restrictions.and(crit1, crit2);
 		List<Question> list = questionDao.findByCriteria(crit);
@@ -74,5 +75,11 @@ public class QuestionService {
 			return null;
 		}
 		return list.get(0);
+	}
+	
+	public List<Question> findByExamen(Examen examen)  {
+		
+	
+		return questionDao.findByExamen(examen);
 	}
 }

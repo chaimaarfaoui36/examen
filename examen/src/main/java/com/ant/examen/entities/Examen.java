@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -23,13 +22,14 @@ public class Examen implements Serializable {
 	private Date dateCreation;
 	@Temporal(TemporalType.DATE)
 	private Date dateExpiration;
+	private int duree;
 	private String libelle;
 	@ManyToOne
 	private Entreprise entreprise;
 	@OneToMany(mappedBy = "examen")
 	private List<Participation> participations;
-	@ManyToMany(mappedBy = "examens")
-	private List<Question> questions;
+	@OneToMany(mappedBy = "examen")
+	private List<QuestionExamen> questionExamens;
 
 	
 	
@@ -69,11 +69,17 @@ public class Examen implements Serializable {
 	public void setParticipations(List<Participation> participations) {
 		this.participations = participations;
 	}
-	public List<Question> getQuestions() {
-		return questions;
+	public List<QuestionExamen> getQuestionExamens() {
+		return questionExamens;
 	}
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
+	public void setQuestionExamens(List<QuestionExamen> questionExamens) {
+		this.questionExamens = questionExamens;
+	}
+	public int getDuree() {
+		return duree;
+	}
+	public void setDuree(int duree) {
+		this.duree = duree;
 	}
 	
 	

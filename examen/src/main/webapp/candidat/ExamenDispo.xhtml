@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<div class="box">
+					<div class="box-body">
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Thème</label>
+								<p:selectCheckboxMenu label="Thème" multiple="true"
+									value="#{examenDisponibleBean.selectThemes}" style="width:100%"
+									filter="true" filterMatchMode="startsWith"
+									panelStyle="width:517px">
+
+
+									<f:selectItems value="#{themeBean.list}" var="t"
+										itemLabel="#{t.libelle}" itemValue="#{t.id}" />
+								</p:selectCheckboxMenu>
+							</div>
+
+							<div class="col-sm-6">
+								<label>Entreprise</label>
+								<p:selectCheckboxMenu value="#{examenDisponibleBean.selectSte}"
+									label="Thème" multiple="true" style="width:100%" filter="true"
+									filterMatchMode="startsWith" panelStyle="width:517px">
+
+
+									<f:selectItems value="#{entrepriseBean.list}" var="t"
+										itemLabel="#{t.nom}" itemValue="#{t.id}" />
+								</p:selectCheckboxMenu>
+							</div>
+
+
+						</div>
+
+
+					</div>
+
+
+					<div class="box-footer">
+						<p:commandLink value="Filtrer"
+							styleClass="btn btn-success col-sm-2
+						 pull-right"
+							update="grid" action="#{examenDisponibleBean.filtrer()}"></p:commandLink>
+					</div>
+
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<p:dataGrid var="exam" value="#{examenDisponibleBean.examens}"
+					columns="3" layout="grid" rows="10" paginator="true"
+					paginatorPosition="bottom" id="grid">
+
+
+
+					<p:panel header="#{exam.libelle}" style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+							<p:graphicImage url="#{exam.entreprise.image}"
+								styleClass="img-circle" width="100" height="100" />
+
+							<h:outputText value="#{exam.entreprise.nom}" />
+
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<h:outputText value="Date Expriration:" />
+							<h:outputText value="#{exam.dateExpiration}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Africa/Tunis" />
+							</h:outputText>
+							<h:outputText value="Durée (min):" />
+							<h:outputText value="#{exam.duree}" />
+						</h:panelGrid>
+
+						<a href="DetailExamen.xhtml?id=#{exam.id}"
+							style="color: white; margin-left: 170px; width: 150px;"
+							class="btn btn-primary"> Participer </a>
+
+					</p:panel>
+
+
+				</p:dataGrid>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

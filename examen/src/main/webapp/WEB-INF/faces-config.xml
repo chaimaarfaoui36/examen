@@ -66,11 +66,16 @@
   <navigation-case>
    <from-outcome>ListExamen</from-outcome>
    <to-view-id>/entreprise/ListExamen.xhtml</to-view-id>
-   <redirect></redirect>
+   <redirect/>
   </navigation-case>
   <navigation-case>
    <from-outcome>Examen</from-outcome>
    <to-view-id>/entreprise/Examen.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ExamenDispo</from-outcome>
+   <to-view-id>/candidat/ExamenDispo.xhtml</to-view-id>
    <redirect></redirect>
   </navigation-case>
  </navigation-rule>

@@ -1,6 +1,8 @@
 package com.ant.examen.services;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -66,14 +68,17 @@ public class ExamenService {
 		return null;
 	}
 
-	
 	public void addQuestion(Question question, Examen examen) {
 
 		Criterion crit = Restrictions.eq("question", question);
-		List<QuestionExamen> list = questionExamenDao.findByCriteria(crit);
+		Criterion crit2 = Restrictions.eq("examen", examen);
+		Criterion crit3 = Restrictions.and(crit, crit2);
+		List<QuestionExamen> list = questionExamenDao.findByCriteria(crit3);
+	
 		if (list.isEmpty()) {
 			QuestionExamen questionExamen = new QuestionExamen();
 			QuestionExamenId questionExamenId = new QuestionExamenId();
+			
 			questionExamenId.setExamensId(examen.getId());
 			questionExamenId.setQuestionsId(question.getId());
 			questionExamen.setId(questionExamenId);
@@ -92,12 +97,33 @@ public class ExamenService {
 		questionExamenDao.delete(questionExamen);
 	}
 
-	public void deletQuestionByTheme(Theme theme,Examen examen) {
-		
-	List<QuestionExamen> list = questionExamenDao.findByThemeExamen(theme, examen);
+	public void deletQuestionByTheme(Theme theme, Examen examen) {
+
+		List<QuestionExamen> list = questionExamenDao.findByThemeExamen(theme, examen);
 		list.forEach(qe -> {
 			questionExamenDao.delete(qe);
 		});
+	}
+
+	public List<Examen> findDisponibleExamen() {
+
+		Criterion crit = Restrictions.ge("dateExpiration", new Date());
+		return examenDao.findByCriteria(crit);
+	}
+
+	public List<Examen> findByThemeAndSte(List<String> themes, List<String> stes) {
+		List<Integer> newListTheme = themes.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+
+		List<Integer> newListSte = stes.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+		if (stes.isEmpty() && !themes.isEmpty()) {
+			return examenDao.findByTheme(newListTheme);
+		} else if (!stes.isEmpty() && themes.isEmpty()) {
+			return examenDao.findBySte(newListSte);
+		}  else if (!stes.isEmpty() && !themes.isEmpty()) {
+			return examenDao.findByThemeAndSte(newListTheme, newListSte);
+		} else {
+			return findDisponibleExamen();
+		}
 	}
 
 }

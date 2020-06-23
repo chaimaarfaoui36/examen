@@ -6,6 +6,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import com.ant.examen.dao.ThemeDao;
+import com.ant.examen.entities.Examen;
 import com.ant.examen.entities.Theme;
 import com.ant.examen.model.MessageResponse;
 
@@ -61,5 +62,16 @@ public class ThemeService {
 
 	public List<Theme> findAll() {
 		return themeDao.findAll();
+	}
+
+	public Theme findById(Integer id) {
+		List<Theme> list = themeDao.findByCriteria(Restrictions.idEq(id));
+		if (!list.isEmpty())
+			return list.get(0);
+		return null;
+	}
+	
+	public List<Theme> findByExamen(Examen examen) {
+		return themeDao.findByExamen(examen);
 	}
 }

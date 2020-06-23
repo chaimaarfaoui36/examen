@@ -48,6 +48,9 @@
    <PROCESS-ITEM-OUTPUT ID="Examen::#entreprise#Examen.xhtml"
     NAME="output13" PATH="/entreprise/Examen.xhtml"
     TARGET="rules:#entreprise#Examen.xhtml" TITLE="Examen" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ExamenDispo::#candidat#ExamenDispo.xhtml"
+    NAME="output14" PATH="/candidat/ExamenDispo.xhtml"
+    TARGET="rules:#candidat#ExamenDispo.xhtml" TITLE="ExamenDispo" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#admin#Question.xhtml"
@@ -85,9 +88,12 @@
   PATH="/entreprise/Profile.xhtml" SHAPE="648,376,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#entreprise#ListExamen.xhtml"
-  PATH="/entreprise/ListExamen.xhtml" SHAPE="648,640,50,25"
+  PATH="/entreprise/ListExamen.xhtml" SHAPE="640,568,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#entreprise#Examen.xhtml"
-  PATH="/entreprise/Examen.xhtml" SHAPE="720,624,50,25"
+  PATH="/entreprise/Examen.xhtml" SHAPE="632,528,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#candidat#ExamenDispo.xhtml"
+  PATH="/candidat/ExamenDispo.xhtml" SHAPE="60,505,0,0"
   model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>

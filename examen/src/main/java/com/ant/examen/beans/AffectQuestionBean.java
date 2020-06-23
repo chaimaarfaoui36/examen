@@ -82,6 +82,7 @@ public class AffectQuestionBean {
 		}
 	}
 	public void onRowSelect(SelectEvent evt) {
+		
 		examenService.addQuestion(((Question)evt.getObject()), examen);
 	}
 	

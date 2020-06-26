@@ -13,12 +13,11 @@ public class ReponseCandidat implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String libelle;
 	private boolean etat;
 	@ManyToOne
 	private Participation participation;
 	@ManyToOne
-	private Question question;
+	private Reponse reponse;
 	
 	
 	public Integer getId() {
@@ -27,12 +26,7 @@ public class ReponseCandidat implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getLibelle() {
-		return libelle;
-	}
-	public void setLibelle(String libelle) {
-		this.libelle = libelle;
-	}
+	
 	public boolean isEtat() {
 		return etat;
 	}
@@ -45,11 +39,11 @@ public class ReponseCandidat implements Serializable {
 	public void setParticipation(Participation participation) {
 		this.participation = participation;
 	}
-	public Question getQuestion() {
-		return question;
+	public Reponse getReponse() {
+		return reponse;
 	}
-	public void setQuestion(Question question) {
-		this.question = question;
+	public void setReponse(Reponse reponse) {
+		this.reponse = reponse;
 	}
 	
 	

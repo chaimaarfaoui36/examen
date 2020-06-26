@@ -25,8 +25,7 @@ public class Question implements Serializable {
 	private List<QuestionExamen> questionExamens;
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Reponse> reponses;
-	@OneToMany(mappedBy = "question")
-	private List<ReponseCandidat> reponseCandidats;
+
 
 	public Question() {
 		theme = new Theme();
@@ -59,13 +58,7 @@ public class Question implements Serializable {
 
 	
 
-	public List<ReponseCandidat> getReponseCandidats() {
-		return reponseCandidats;
-	}
-
-	public void setReponseCandidats(List<ReponseCandidat> reponseCandidats) {
-		this.reponseCandidats = reponseCandidats;
-	}
+	
 
 	public List<QuestionExamen> getQuestionExamens() {
 		return questionExamens;

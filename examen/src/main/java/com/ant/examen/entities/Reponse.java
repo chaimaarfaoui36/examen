@@ -1,12 +1,14 @@
 package com.ant.examen.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Reponse implements Serializable {
@@ -17,6 +19,8 @@ public class Reponse implements Serializable {
 	private boolean correct;
 	@ManyToOne
 	private Question question;
+	@OneToMany(mappedBy = "reponse")
+	private List<ReponseCandidat> reponseCandidats;
 	public Integer getId() {
 		return id;
 	}

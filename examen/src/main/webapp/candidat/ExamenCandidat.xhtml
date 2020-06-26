@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+			<h:form>
+
+
+				<div class=" pull-right">
+
+
+					<pe:timer timeout="#{participationBean.diffSeconde}"
+					
+						format="HH:mm:ss" listener="#{participationBean.timerCompleted}">
+						
+						</pe:timer>
+
+
+				</div>
+
+				<br />
+				<br />
+				<p:repeat var="theme" value="#{participationBean.themes}">
+					<div class="box">
+						<div class="box-header with-border">
+
+							<h3 class="box-title">#{theme.libelle}</h3>
+						</div>
+						<div class="box-body">
+
+							<p:repeat varStatus="myStatus" var="quest"
+								value="#{participationBean.findQuestionByTheme(theme)}">
+								<div class="form-group row">
+									<label class="col-sm-12 col-form-label">#{myStatus.index+1}
+										- #{quest.libelle}</label>
+							
+								</div>
+								
+								
+<!-- 							<p:repeat var="rep" -->
+<!-- 										value="#{participationBean.findByQuestion(quest)}"> -->
+									<div class="form-group row">
+									<div class="col-sm-12">
+									<p:selectOneRadio   layout="pageDirection" columns="1" rendered="#{quest.multiChoice eq true ?  false: true}">
+									<f:selectItems value="#{participationBean.findByQuestion(quest)}" var="rep" itemLabel="#{rep.libelle}" />
+									
+									</p:selectOneRadio>
+									<p:selectManyCheckbox   layout="pageDirection" columns="1" rendered="#{quest.multiChoice eq true ?  true: false}">
+									<f:selectItems value="#{participationBean.findByQuestion(quest)}" var="rep" itemLabel="#{rep.libelle}" />
+									
+									</p:selectManyCheckbox>
+									</div>
+									</div>
+<!-- 									</p:repeat>	 -->
+
+							</p:repeat>
+
+
+						</div>
+					</div>
+				</p:repeat>
+
+
+
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+</body>
+</html>

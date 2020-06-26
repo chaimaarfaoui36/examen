@@ -82,4 +82,10 @@ public class QuestionService {
 	
 		return questionDao.findByExamen(examen);
 	}
+	
+	public List<Question> findByExamenAndTheme(Examen examen, Theme theme)  {
+		
+		
+		return questionDao.findByExamenAndTheme(examen, theme);
+	}
 }

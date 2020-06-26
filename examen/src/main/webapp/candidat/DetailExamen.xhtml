@@ -9,6 +9,7 @@
 <body>
 	<ui:composition template="/facelets/Template.xhtml">
 		<ui:define name="content">
+		<h:form>
 			<div class="box">
 				<div class="box-header with-border">
 					<h3 class="box-title">
@@ -111,7 +112,14 @@
 						</div>
 				
 				</div>
+				
+					<div class="box-footer">
+					<a href="ExamenCandidat.xhtml?id=#{detailExamenBean.examen.id}"
+							style="color: white; margin-left: 170px; width: 150px;"
+							class="btn btn-success pull-right"> Commencer </a>
+				</div>
 			</div>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </body>

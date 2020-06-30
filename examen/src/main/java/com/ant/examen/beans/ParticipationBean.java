@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,13 +22,13 @@ import com.ant.examen.entities.Candidat;
 import com.ant.examen.entities.Examen;
 import com.ant.examen.entities.Participation;
 import com.ant.examen.entities.Question;
-import com.ant.examen.entities.Reponse;
+import com.ant.examen.entities.ReponseCandidat;
 import com.ant.examen.entities.Theme;
 import com.ant.examen.services.CandidatService;
 import com.ant.examen.services.ExamenService;
 import com.ant.examen.services.ParticipationService;
 import com.ant.examen.services.QuestionService;
-import com.ant.examen.services.ReponseService;
+import com.ant.examen.services.ReponseCandidatService;
 import com.ant.examen.services.ThemeService;
 
 @ManagedBean
@@ -44,7 +45,11 @@ public class ParticipationBean {
 	private QuestionService questionService = new QuestionService();
 	private ThemeService themeService = new ThemeService();
 	private List<Theme> themes = new ArrayList<>();
-	private ReponseService reponseService = new ReponseService();
+	// private ReponseService reponseService = new ReponseService();
+	private ReponseCandidat singleReponse = new ReponseCandidat();
+	private List<ReponseCandidat> multiReponses;
+	private ReponseCandidatService reponseCandidatService = new ReponseCandidatService();
+
 	@PostConstruct
 	public void init() {
 		try {
@@ -60,23 +65,20 @@ public class ParticipationBean {
 				participation.setExamen(examen);
 				participation = participationService.save(participation);
 				themes = themeService.findByExamen(examen);
-			
+
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(participation.getDateParticipation());
 				cal.add(Calendar.MINUTE, examen.getDuree());
-				Date dateFin = cal.getTime()  ;
+				Date dateFin = cal.getTime();
 				LocalDateTime debut = convertToLocalDateViaInstant(participation.getDateParticipation());
 				LocalDateTime fin = convertToLocalDateViaInstant(dateFin);
-			
-				
+
 				diffSeconde = ChronoUnit.SECONDS.between(LocalDateTime.now(), fin);
-				
-				if(diffSeconde<=0) {
+
+				if (diffSeconde <= 0) {
 					diffSeconde = 10;
 				}
-				
-				
-			
+
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -87,13 +89,37 @@ public class ParticipationBean {
 	public void timerCompleted() {
 		System.out.println("************ finished");
 	}
+
 	public List<Question> findQuestionByTheme(Theme theme) {
-		return questionService.findByExamenAndTheme(examen ,theme);
+		return questionService.findByExamenAndTheme(examen, theme);
 	}
-	public List<Reponse> findByQuestion(Question question) {
-		return reponseService.findByQuestion(question);
+
+	public List<ReponseCandidat> findByQuestion(Question question) {
+		List<ReponseCandidat> result = reponseCandidatService.findByQuestion(question, participation);
+		result.forEach(res -> {
+			if (res.isEtat()) {
+				singleReponse = res;
+			}
+
+		});
+		return result;
 	}
+
+	public void repondreSingleChoice() {
+		try {
+			reponseCandidatService.updateSingleResponse(singleReponse);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void checkReponse(ReponseCandidat reponseCandidat) {
+		reponseCandidat.setEtat(!reponseCandidat.isEtat());
+		reponseCandidatService.updateMultiResponse(reponseCandidat);
 	
+	}
+
 	public LocalDateTime convertToLocalDateViaInstant(Date dateToConvert) {
 		return dateToConvert.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
@@ -129,6 +155,21 @@ public class ParticipationBean {
 	public void setThemes(List<Theme> themes) {
 		this.themes = themes;
 	}
-	
+
+	public ReponseCandidat getSingleReponse() {
+		return singleReponse;
+	}
+
+	public void setSingleReponse(ReponseCandidat singleReponse) {
+		this.singleReponse = singleReponse;
+	}
+
+	public List<ReponseCandidat> getMultiReponses() {
+		return multiReponses;
+	}
+
+	public void setMultiReponses(List<ReponseCandidat> multiReponses) {
+		this.multiReponses = multiReponses;
+	}
 
 }

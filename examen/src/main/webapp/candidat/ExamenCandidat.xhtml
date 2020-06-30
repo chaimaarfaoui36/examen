@@ -17,10 +17,9 @@
 
 
 					<pe:timer timeout="#{participationBean.diffSeconde}"
-					
 						format="HH:mm:ss" listener="#{participationBean.timerCompleted}">
-						
-						</pe:timer>
+
+					</pe:timer>
 
 
 				</div>
@@ -40,25 +39,38 @@
 								<div class="form-group row">
 									<label class="col-sm-12 col-form-label">#{myStatus.index+1}
 										- #{quest.libelle}</label>
-							
+
 								</div>
-								
-								
-<!-- 							<p:repeat var="rep" -->
-<!-- 										value="#{participationBean.findByQuestion(quest)}"> -->
-									<div class="form-group row">
+
+
+
+								<div class="form-group row">
 									<div class="col-sm-12">
-									<p:selectOneRadio   layout="pageDirection" columns="1" rendered="#{quest.multiChoice eq true ?  false: true}">
-									<f:selectItems value="#{participationBean.findByQuestion(quest)}" var="rep" itemLabel="#{rep.libelle}" />
-									
-									</p:selectOneRadio>
-									<p:selectManyCheckbox   layout="pageDirection" columns="1" rendered="#{quest.multiChoice eq true ?  true: false}">
-									<f:selectItems value="#{participationBean.findByQuestion(quest)}" var="rep" itemLabel="#{rep.libelle}" />
-									
-									</p:selectManyCheckbox>
+										<p:selectOneRadio
+											value="#{participationBean.singleReponse.id}"
+											layout="pageDirection" columns="1"
+											rendered="#{quest.multiChoice eq true ?  false: true}">
+											<f:selectItems
+												value="#{participationBean.findByQuestion(quest)}" var="rep"
+												itemValue="#{rep.id}" itemLabel="#{rep.reponse.libelle}" />
+											<p:ajax event="valueChange"
+												listener="#{participationBean.repondreSingleChoice()}"></p:ajax>
+										</p:selectOneRadio>
+
+										<p:repeat rendered="#{quest.multiChoice eq true ?  true: false}"
+										var="rep" 
+											value="#{participationBean.findByQuestion(quest)}">
+
+											<p:selectBooleanCheckbox  value="#{rep.etat}"
+												itemLabel="#{rep.reponse.libelle}">
+												<p:ajax listener="#{participationBean.checkReponse(rep)}"></p:ajax>
+											</p:selectBooleanCheckbox>
+											<br/>
+										</p:repeat>
+					
 									</div>
-									</div>
-<!-- 									</p:repeat>	 -->
+								</div>
+
 
 							</p:repeat>
 

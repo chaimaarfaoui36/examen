@@ -46,7 +46,7 @@
 
 								<div class="form-group row">
 									<div class="col-sm-12">
-										<p:selectOneRadio
+										<p:selectOneRadio style="font-weight: initial;"
 											value="#{participationBean.singleReponse.id}"
 											layout="pageDirection" columns="1"
 											rendered="#{quest.multiChoice eq true ?  false: true}">
@@ -57,17 +57,18 @@
 												listener="#{participationBean.repondreSingleChoice()}"></p:ajax>
 										</p:selectOneRadio>
 
-										<p:repeat rendered="#{quest.multiChoice eq true ?  true: false}"
-										var="rep" 
-											value="#{participationBean.findByQuestion(quest)}">
+										<p:repeat
+											rendered="#{quest.multiChoice eq true ?  true: false}"
+											var="rep" value="#{participationBean.findByQuestion(quest)}">
 
-											<p:selectBooleanCheckbox  value="#{rep.etat}"
+											<p:selectBooleanCheckbox value="#{rep.etat}"
+											
 												itemLabel="#{rep.reponse.libelle}">
 												<p:ajax listener="#{participationBean.checkReponse(rep)}"></p:ajax>
 											</p:selectBooleanCheckbox>
-											<br/>
+											<br />
 										</p:repeat>
-					
+
 									</div>
 								</div>
 
@@ -78,8 +79,13 @@
 						</div>
 					</div>
 				</p:repeat>
-
-
+				<div class="form-group row">
+					<div class="pull-right col-sm-3">
+						<a href="Resultat.xhtml?id=#{participationBean.participation.id}"
+							style="color: white" class="btn btn-success btn-block">
+							Términer </a>
+					</div>
+				</div>
 
 			</h:form>
 		</ui:define>

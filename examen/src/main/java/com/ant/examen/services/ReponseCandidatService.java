@@ -2,15 +2,14 @@ package com.ant.examen.services;
 
 import java.util.List;
 
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import com.ant.examen.dao.ReponseCandidatDao;
-import com.ant.examen.dao.ReponseDao;
+import com.ant.examen.entities.Examen;
 import com.ant.examen.entities.Participation;
 import com.ant.examen.entities.Question;
-import com.ant.examen.entities.Reponse;
 import com.ant.examen.entities.ReponseCandidat;
+import com.ant.examen.entities.Theme;
 
 public class ReponseCandidatService {
 	
@@ -28,8 +27,6 @@ public class ReponseCandidatService {
 			rep.setEtat(false);
 			reponseCandidatDao.update(rep);
 		});
-			
-			
 		
 			reponseCandidat.setEtat(true);
 			reponseCandidatDao.update(reponseCandidat);
@@ -48,4 +45,8 @@ public class ReponseCandidatService {
 	public List<ReponseCandidat> findByQuestion(Question question, Participation participation) {
 		return reponseCandidatDao.findByQuestion(question, participation);
 	}
+	
+	
+	
+	
 }

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+
+			<p:repeat var="theme" value="#{resultatBean.themes}">
+				<div class="box">
+					<div class="box-header with-border">
+						#{resultatBean.calculByTheme(theme)}
+						<h3 class="box-title">#{theme.libelle}
+							(#{resultatBean.resultByTheme.reponseCorrect} /
+							#{resultatBean.resultByTheme.totalReponse})</h3>
+					</div>
+					<div class="box-body">
+
+						<p:repeat varStatus="myStatus" var="quest"
+							value="#{resultatBean.findQuestionByTheme(theme)}">
+							<div class="form-group row">
+								<label class="col-sm-12 col-form-label">#{myStatus.index+1}
+									- #{quest.libelle}</label>
+
+							</div>
+
+
+
+							<div class="form-group row">
+								<div class="col-sm-12">
+
+
+
+									<p:dataTable var="rep"
+										value="#{resultatBean.findByQuestion(quest)}">
+
+										<p:column headerText="Réponse">
+											<h:outputText value="#{rep.reponse.libelle}" />
+										</p:column>
+										<p:column headerText="Réponse Correcte" width="15%">
+											<h:outputText value="#{rep.reponse.correct ? 'Vrai': 'Faux'}" />
+										</p:column>
+										<p:column headerText="Votre Réponse" width="15%">
+											<h:outputText value="#{rep.etat ? 'Vrai': 'Faux'}" />
+										</p:column>
+
+
+									</p:dataTable>
+
+
+								</div>
+							</div>
+
+
+						</p:repeat>
+
+
+					</div>
+				</div>
+			</p:repeat>
+
+			<div class="box">
+				<div class="box-header with-border">
+					#{resultatBean.calculByParticipation()}
+					<h3 class="box-title">Résultat Final</h3>
+				</div>
+				<div class="box-body">
+					<div class="form-group row">
+
+						<label class="col-sm-3">Nombre réponse correcte:</label> <label
+							class="col-sm-2">#{resultatBean.result.reponseCorrect}</label> <label
+							class="col-sm-3">Score:</label> <label class="col-sm-3">
+							<h:outputText value="#{resultatBean.result.score}">
+							<f:convertNumber type="percent"  /> 
+							</h:outputText>
+							</label>
+
+
+
+					</div>
+
+
+					<div class="form-group row">
+
+						<label class="col-sm-3">Nombre Question:</label> <label
+							class="col-sm-2">#{resultatBean.result.totalReponse}</label> <label
+							class="col-sm-3">Niveau:</label> <label class="col-sm-3">#{resultatBean.result.message}</label>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

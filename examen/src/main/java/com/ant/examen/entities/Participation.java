@@ -20,6 +20,7 @@ public class Participation implements Serializable {
 	private Integer id;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateParticipation;
+	private boolean finished;
 	private double score;
 	@ManyToOne
 	private Candidat candidat;
@@ -27,44 +28,61 @@ public class Participation implements Serializable {
 	private Examen examen;
 	@OneToMany(mappedBy = "participation")
 	private List<ReponseCandidat> reponseCandidats;
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Date getDateParticipation() {
 		return dateParticipation;
 	}
+
 	public void setDateParticipation(Date dateParticipation) {
 		this.dateParticipation = dateParticipation;
 	}
+
 	public double getScore() {
 		return score;
 	}
+
 	public void setScore(double score) {
 		this.score = score;
 	}
+
 	public Candidat getCandidat() {
 		return candidat;
 	}
+
 	public void setCandidat(Candidat candidat) {
 		this.candidat = candidat;
 	}
+
 	public Examen getExamen() {
 		return examen;
 	}
+
 	public void setExamen(Examen examen) {
 		this.examen = examen;
 	}
+
 	public List<ReponseCandidat> getReponseCandidats() {
 		return reponseCandidats;
 	}
+
 	public void setReponseCandidats(List<ReponseCandidat> reponseCandidats) {
 		this.reponseCandidats = reponseCandidats;
 	}
-	
-	
-	
-	
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+
 }

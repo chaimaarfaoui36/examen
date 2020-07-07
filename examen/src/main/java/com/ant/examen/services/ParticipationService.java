@@ -60,4 +60,14 @@ public class ParticipationService {
 		return participation;
 
 	}
+
+	public Participation findById(Integer idQ) {
+		Criterion crit = Restrictions.idEq(idQ);
+
+		List<Participation> list = participationDao.findByCriteria(crit);
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+		return null;
+	}
 }

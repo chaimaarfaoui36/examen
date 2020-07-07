@@ -172,4 +172,12 @@ public class ParticipationBean {
 		this.multiReponses = multiReponses;
 	}
 
+	public Participation getParticipation() {
+		return participation;
+	}
+
+	public void setParticipation(Participation participation) {
+		this.participation = participation;
+	}
+
 }

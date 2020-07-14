@@ -17,7 +17,7 @@
 								<h3 class="box-title">Examen</h3>
 							</div>
 							<div class="box-body">
-								<div class="col-sm-6">
+								<div class="col-sm-5">
 									<div class="form-group">
 
 
@@ -32,7 +32,7 @@
 									</div>
 								</div>
 								
-								<div class="col-sm-4">
+								<div class="col-sm-5">
 									<div class="form-group">
 
 
@@ -56,7 +56,7 @@
 
 										<p:calendar required="true"
 											requiredMessage="Date début réquis" pattern="dd/MM/yyyy"
-											value="#{examenBean.examen.dateCreation}"
+											value="#{examenBean.examen.dateCreation}" timeZone="CET"
 											mindate="#{examenBean.minDate}">
 											<p:ajax event="dateSelect"
 												listener="#{examenBean.onDateSelect}" update="date2" />
@@ -75,7 +75,7 @@
 
 
 										<p:calendar id="date2" pattern="dd/MM/yyyy" required="true"
-											requiredMessage="Date fin réquis"
+											requiredMessage="Date fin réquis" timeZone="CET"
 											mindate="#{examenBean.minDateFin}"
 											value="#{examenBean.examen.dateExpiration}"></p:calendar>
 

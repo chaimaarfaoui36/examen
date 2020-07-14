@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Mes Participations</h3>
+				</div>
+				<div class="box-body">
+					<p:dataTable value="#{participationCandidatBean.participations}"
+						var="part">
+						<p:column headerText="Date Participation">
+							<h:outputText value="#{part.dateParticipation}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Entreprise">
+							<h:outputText value="#{part.examen.entreprise.nom}">
+
+							</h:outputText>
+						</p:column>
+
+
+						<p:column headerText="Examen">
+							<h:outputText value="#{part.examen.libelle}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Durée">
+							<h:outputText value="#{part.examen.duree}">
+
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Score">
+							<h:outputText value="#{part.score}">
+								<f:convertNumber type="percent" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Résultat" width="8%">
+
+							<a href="Resultat.xhtml?id=#{part.id}" style="color: white"
+								class="btn btn-success "> Détail </a>
+						</p:column>
+					</p:dataTable>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

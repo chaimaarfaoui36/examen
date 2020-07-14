@@ -2,8 +2,6 @@ package com.ant.examen.services;
 
 import java.util.List;
 
-import javax.swing.JSpinner.ListEditor;
-
 import com.ant.examen.dao.ParticipationDao;
 import com.ant.examen.entities.Participation;
 import com.ant.examen.entities.Question;

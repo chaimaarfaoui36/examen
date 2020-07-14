@@ -22,5 +22,6 @@
 		<mapping class="com.ant.examen.entities.Reponse" />
 		<mapping class="com.ant.examen.entities.ReponseCandidat" />
 		<mapping class="com.ant.examen.entities.QuestionExamen" />
+		<mapping class="com.ant.examen.entities.Invitation" />
 	</session-factory>
 </hibernate-configuration>

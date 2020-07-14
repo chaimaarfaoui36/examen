@@ -76,7 +76,38 @@
   <navigation-case>
    <from-outcome>ExamenDispo</from-outcome>
    <to-view-id>/candidat/ExamenDispo.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>MesParticipations</from-outcome>
+   <to-view-id>/candidat/MesParticipations.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ParticipationExamen</from-outcome>
+   <to-view-id>/entreprise/ParticipationExamen.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>Invitation</from-outcome>
+   <to-view-id>/entreprise/Invitation.xhtml</to-view-id>
    <redirect></redirect>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/candidat/ExamenDispo.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>ExamenCandidat</from-outcome>
+   <to-view-id>/candidat/ExamenCandidat.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/candidat/ExamenCandidat.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>Resultat</from-outcome>
+   <to-view-id>/candidat/Resultat.xhtml</to-view-id>
+   <redirect/>
   </navigation-case>
  </navigation-rule>
  <application/>

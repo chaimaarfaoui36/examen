@@ -28,6 +28,8 @@ public class Participation implements Serializable {
 	private Examen examen;
 	@OneToMany(mappedBy = "participation")
 	private List<ReponseCandidat> reponseCandidats;
+	@OneToMany(mappedBy = "participation")
+	private List<Invitation> invitations;
 
 	public Integer getId() {
 		return id;
@@ -83,6 +85,14 @@ public class Participation implements Serializable {
 
 	public void setFinished(boolean finished) {
 		this.finished = finished;
+	}
+
+	public List<Invitation> getInvitations() {
+		return invitations;
+	}
+
+	public void setInvitations(List<Invitation> invitations) {
+		this.invitations = invitations;
 	}
 
 }

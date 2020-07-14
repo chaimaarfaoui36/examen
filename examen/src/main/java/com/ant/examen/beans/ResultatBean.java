@@ -43,10 +43,12 @@ public class ResultatBean {
 			Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext()
 					.getRequestParameterMap();
 			id = params.get("id");
+			
 			if (id != null) {
 				Integer idQ = Integer.valueOf(id);
-
+		
 				participation = participationService.findById(idQ);
+				participationService.finshParticipation(participation);
 				examen = participation.getExamen();
 				themes = themeService.findByExamen(examen);
 			}

@@ -28,72 +28,95 @@
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu tree" data-widget="tree">
-	<h:panelGroup rendered="#{connexionBean.admin}">
-	
-					<li class=" treeview"><a href="#"> <i class="fa fa-users"></i>
-							<span>Gestion utilisateurs</span> <span
-							class="pull-right-container"> <i
-								class="fa fa-angle-left pull-right"></i>
-						</span>
-					</a>
-						<ul class="treeview-menu" style="display: none;">
-							<li class="active"><h:commandLink action="Candidat">
-									<i class="fa fa-circle-o"></i> Liste des candidats</h:commandLink></li>
-							<li><h:commandLink action="Entreprise">
-									<i class="fa fa-circle-o"></i> Liste des entreprises</h:commandLink></li>
-						</ul></li>
+					<h:panelGroup rendered="#{connexionBean.admin}">
+
+						<li class=" treeview"><a href="#"> <i class="fa fa-users"></i>
+								<span>Gestion utilisateurs</span> <span
+								class="pull-right-container"> <i
+									class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+							<ul class="treeview-menu" style="display: none;">
+								<li class="active"><h:commandLink action="Candidat">
+										<i class="fa fa-circle-o"></i> Liste des candidats</h:commandLink></li>
+								<li><h:commandLink action="Entreprise">
+										<i class="fa fa-circle-o"></i> Liste des entreprises</h:commandLink></li>
+							</ul></li>
 
 
 
-					<li class=" treeview"><a href="#"> <i
-							class="fa fa-tachometer"></i> <span>Gestion des questions</span>
-							<span class="pull-right-container"> <i
-								class="fa fa-angle-left pull-right"></i>
-						</span>
-					</a>
-						<ul class="treeview-menu" style="display: none;">
-							<li class="active"><h:commandLink action="ListQuestion">
-									<i class="fa fa-circle-o"></i> Liste des questions</h:commandLink></li>
-							<li><h:commandLink action="Question">
-									<i class="fa fa-circle-o"></i> Nouvelle question</h:commandLink></li>
-						</ul></li>
-
-
-					<li class=" treeview"><h:commandLink action="Theme">
-							<i class="fa fa-tachometer"></i>
-							<span>Gestion des Thèmes</span>
-							
-						</h:commandLink></li>
-						
-						</h:panelGroup>
-						
-						
-						<h:panelGroup rendered="#{connexionBean.entreprise}">
-						
-						
 						<li class=" treeview"><a href="#"> <i
-							class="fa fa-tachometer"></i> <span>Gestion des examens</span>
-							<span class="pull-right-container"> <i
-								class="fa fa-angle-left pull-right"></i>
-						</span>
-					</a>
-						<ul class="treeview-menu" style="display: none;">
-							<li class="active"><h:commandLink action="ListExamen">
-									<i class="fa fa-circle-o"></i> Liste des examens</h:commandLink></li>
-							<li><h:commandLink action="Examen">
-									<i class="fa fa-circle-o"></i> Nouvel examen</h:commandLink></li>
-						</ul></li>
-						
-						</h:panelGroup>
-						
-						<h:panelGroup rendered="#{connexionBean.candidat}">
-						
-							<li class=" treeview"><h:commandLink action="ExamenDispo">
-							<i class="fa fa-tachometer"></i>
-							<span>Examen en ligne</span>
-							
-						</h:commandLink></li>
-						</h:panelGroup>
+								class="fa fa-tachometer"></i> <span>Gestion des questions</span>
+								<span class="pull-right-container"> <i
+									class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+							<ul class="treeview-menu" style="display: none;">
+								<li class="active"><h:commandLink action="ListQuestion">
+										<i class="fa fa-circle-o"></i> Liste des questions</h:commandLink></li>
+								<li><h:commandLink action="Question">
+										<i class="fa fa-circle-o"></i> Nouvelle question</h:commandLink></li>
+							</ul></li>
+
+
+						<li class=" treeview"><h:commandLink action="Theme">
+								<i class="fa fa-tachometer"></i>
+								<span>Gestion des Thèmes</span>
+
+							</h:commandLink></li>
+
+					</h:panelGroup>
+
+
+					<h:panelGroup rendered="#{connexionBean.entreprise}">
+
+
+						<li class=" treeview"><a href="#"> <i
+								class="fa fa-tachometer"></i> <span>Gestion des examens</span> <span
+								class="pull-right-container"> <i
+									class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+							<ul class="treeview-menu" style="display: none;">
+								<li class="active"><h:commandLink action="ListExamen">
+										<i class="fa fa-circle-o"></i> Liste des examens</h:commandLink></li>
+								<li><h:commandLink action="Examen">
+										<i class="fa fa-circle-o"></i> Nouvel examen</h:commandLink></li>
+							</ul></li>
+
+
+						<li class=" treeview"><h:commandLink
+								action="ParticipationExamen">
+								<i class="fa fa-tachometer"></i>
+								<span>Participations</span>
+
+							</h:commandLink></li>
+
+
+						<li class=" treeview"><h:commandLink
+								action="Invitation">
+								<i class="fa fa-tachometer"></i>
+								<span>Invitations</span>
+
+							</h:commandLink></li>
+
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{connexionBean.candidat}">
+
+						<li class=" treeview"><h:commandLink action="ExamenDispo">
+								<i class="fa fa-tachometer"></i>
+								<span>Examen en ligne</span>
+
+							</h:commandLink></li>
+
+						<li class=" treeview"><h:commandLink
+								action="MesParticipations">
+								<i class="fa fa-tachometer"></i>
+								<span>Mes participations</span>
+
+							</h:commandLink></li>
+					</h:panelGroup>
 
 				</ul>
 			</section>

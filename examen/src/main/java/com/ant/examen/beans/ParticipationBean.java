@@ -1,5 +1,6 @@
 package com.ant.examen.beans;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -13,7 +14,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -52,6 +52,7 @@ public class ParticipationBean {
 
 	@PostConstruct
 	public void init() {
+
 		try {
 			Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext()
 					.getRequestParameterMap();
@@ -74,9 +75,20 @@ public class ParticipationBean {
 				LocalDateTime fin = convertToLocalDateViaInstant(dateFin);
 
 				diffSeconde = ChronoUnit.SECONDS.between(LocalDateTime.now(), fin);
+				
+				if (diffSeconde <= 0 || participation.isFinished()) {
 
-				if (diffSeconde <= 0) {
+					try {
+						String uri = "Resultat.xhtml?id=" + participation.getId();
+						// FacesContext.getCurrentInstance().getExternalContext().dispatch(uri);
+						FacesContext.getCurrentInstance().getExternalContext().redirect(uri);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 					diffSeconde = 10;
+					// return "Resultat.xhtml?id="+participation.getId();
 				}
 
 			}
@@ -84,10 +96,21 @@ public class ParticipationBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		// return null;
 	}
 
 	public void timerCompleted() {
-		System.out.println("************ finished");
+
+		try {
+			
+			String uri = "Resultat.xhtml?id=" + participation.getId();
+			// FacesContext.getCurrentInstance().getExternalContext().dispatch(uri);
+			FacesContext.getCurrentInstance().getExternalContext().redirect(uri);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public List<Question> findQuestionByTheme(Theme theme) {
@@ -117,7 +140,7 @@ public class ParticipationBean {
 	public void checkReponse(ReponseCandidat reponseCandidat) {
 		reponseCandidat.setEtat(!reponseCandidat.isEtat());
 		reponseCandidatService.updateMultiResponse(reponseCandidat);
-	
+
 	}
 
 	public LocalDateTime convertToLocalDateViaInstant(Date dateToConvert) {

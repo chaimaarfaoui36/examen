@@ -1,6 +1,8 @@
 package com.ant.examen.beans;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,20 +34,31 @@ public class ExamenBean {
 	private EntrepriseService entrepriseService = new EntrepriseService();
 	private Examen examen = new Examen();
 	private Date minDate = new Date();
-	private Date minDateFin = new Date();
+	private Date minDateFin;
 	private List<Examen> list = new ArrayList<>();
 	private String id;
 	private boolean btnAdd, btnEdit;
 
 	@PostConstruct
 	public void init() {
+		
+	
 
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		id = params.get("id");
 		if (id == null) {
+			
 			examen = new Examen();
+		
+			
+			
+		
 			minDate = new Date();
-			minDateFin = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(new Date());
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+			minDateFin = cal.getTime();
+			
 			btnAdd = true;
 			btnEdit = false;
 
@@ -61,7 +74,10 @@ public class ExamenBean {
 	}
 
 	public void onDateSelect(SelectEvent event) {
-		minDateFin = examen.getDateCreation();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(examen.getDateCreation());
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		minDateFin = cal.getTime();
 	}
 
 	public String ajouter() {
@@ -115,7 +131,7 @@ public class ExamenBean {
 	public String modifier() {
 
 		try {
-			
+
 			MessageResponse result = examenService.update(examen);
 			if (result.isSuccess()) {
 				FacesContext.getCurrentInstance().addMessage(null,

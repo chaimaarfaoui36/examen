@@ -1,13 +1,17 @@
 package com.ant.examen.services;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import com.ant.examen.dao.ParticipationDao;
 import com.ant.examen.dao.ReponseCandidatDao;
+import com.ant.examen.entities.Candidat;
+import com.ant.examen.entities.Examen;
 import com.ant.examen.entities.Participation;
 import com.ant.examen.entities.Question;
 import com.ant.examen.entities.Reponse;
@@ -69,5 +73,27 @@ public class ParticipationService {
 			return list.get(0);
 		}
 		return null;
+	}
+
+	public void finshParticipation(Participation participation) {
+		participation.setFinished(true);
+		participationDao.update(participation);
+
+	}
+
+	public List<Participation> findByCandidat(Candidat candidat) {
+		Criterion crit = Restrictions.eq("candidat", candidat);
+		// TODO Auto-generated method stub
+		return participationDao.findByCriteria(crit);
+	}
+
+	public List<Participation> findByExamen(Examen examen) {
+		Criterion crit = Restrictions.eq("examen", examen);
+		// TODO Auto-generated method stub List<User> sortedList = users.stream()
+		List<Participation> list = participationDao.findByCriteria(crit);
+
+		List<Participation> sortedList = list.stream().sorted(Comparator.comparingDouble(Participation::getScore).reversed())
+				.collect(Collectors.toList());
+		return sortedList;
 	}
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/facelets/Template.xhtml">
+		<ui:define name="content">
+
+			<div class="box box-secondary">
+
+				<div class="box-body">
+					<h:form id="f1">
+
+
+
+						<p:dataTable id="tab"
+							value="#{invitationEntrepriseBean.invitations}" var="invit">
+							<p:column headerText="Date Invitation">
+								<h:outputText value="#{invit.dateInvitation}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+										timeZone="Africa/Tunis" />
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="Candidat">
+								<h:outputText value="#{invit.participation.candidat.nom}">
+
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="Examen">
+								<h:outputText value="#{invit.participation.examen.libelle}">
+
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Etat">
+								<h:outputText value="#{invit.etat}" />
+							</p:column>
+
+
+							<p:column headerText="Opérations" width="10%">
+
+
+							</p:column>
+
+
+						</p:dataTable>
+
+
+
+
+
+
+
+
+					</h:form>
+				</div>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

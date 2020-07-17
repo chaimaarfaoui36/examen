@@ -25,13 +25,25 @@ public class InvitationDao extends GenericDao<Invitation> {
 		return list;
 	}
 
-	
 	public List<Invitation> findByCandidat(Candidat candidat) {
 		startOperation();
 		List<Invitation> list = hibernateSession
 
 				.createQuery("select i from Invitation i " + " where i.participation.candidat=:candidat")
 				.setParameter("candidat", candidat).list();
+
+		hibernateSession.close();
+
+		return list;
+	}
+
+	public List<Invitation> findByCandidatAndEtat(Candidat candidat, String etat) {
+		startOperation();
+		List<Invitation> list = hibernateSession
+
+				.createQuery(
+						"select i from Invitation i " + " where i.participation.candidat=:candidat and i.etat=:etat")
+				.setParameter("candidat", candidat).setParameter("etat", etat).list();
 
 		hibernateSession.close();
 

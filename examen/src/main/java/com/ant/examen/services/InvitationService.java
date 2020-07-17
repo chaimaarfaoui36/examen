@@ -6,6 +6,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import com.ant.examen.dao.InvitationDao;
+import com.ant.examen.entities.Candidat;
 import com.ant.examen.entities.Entreprise;
 import com.ant.examen.entities.Invitation;
 import com.ant.examen.model.MessageResponse;
@@ -29,5 +30,21 @@ public class InvitationService {
 
 	public List<Invitation> findByEntreprise(Entreprise entreprise) {
 		return invitationDao.findByEntreprise(entreprise);
+	}
+
+	public MessageResponse update(Invitation invitation) {
+		invitationDao.update(invitation);
+		return new MessageResponse(true, "Opération effectuée avec succès");
+	}
+
+	public List<Invitation> findByCandidat(Candidat candidat) {
+		// TODO Auto-generated method stub
+		return invitationDao.findByCandidat(candidat);
+	}
+	
+	
+	public List<Invitation> findByCandidatAndEtat(Candidat candidat, String etat) {
+		// TODO Auto-generated method stub
+		return invitationDao.findByCandidatAndEtat(candidat, etat);
 	}
 }

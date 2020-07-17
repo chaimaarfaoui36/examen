@@ -26,7 +26,40 @@
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
 					<!-- Messages: style can be found in dropdown.less-->
+					<h:panelGroup rendered="#{connexionBean.candidat}">
+				
+					<li class="dropdown notifications-menu"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"
+						aria-expanded="false"> <i class="fa fa-bell-o"></i> <span
+							class="label label-warning">#{invitationCandidatBean.notifications.size()}</span>
+					</a>
+						<ul class="dropdown-menu">
+							<li class="header">Vous avez
+								#{invitationCandidatBean.notifications.size()} invitations</li>
+							<li>
+								<!-- inner menu: contains the actual data -->
+								<ul class="menu">
+									<p:repeat var="invit"
+										value="#{invitationCandidatBean.notifications}">
+										<li><a href="#">
+												<div class="pull-left">
+													<img src="#{invit.participation.examen.entreprise.image}"
+														class="img-circle" alt="User Image" width="40" height="40" />
+												</div>
+												<h5>#{invit.participation.examen.entreprise.nom}</h5>
+										</a></li>
+									</p:repeat>
 
+								</ul>
+							</li>
+							<li class="footer">
+					
+							<a href="../candidat/MesInvitation.xhtml">Afficher tous</a>
+							
+							</li>
+						</ul></li>
+						</h:panelGroup>
+					
 					<!-- Notifications: style can be found in dropdown.less -->
 
 					<!-- Tasks: style can be found in dropdown.less -->
@@ -60,22 +93,19 @@
 							<!-- Menu Footer-->
 							<li class="user-footer">
 								<div class="pull-left">
-								<h:form>
-									<h:commandLink rendered="#{connexionBean.admin}"
-									action="AdminProfile"
-									 class="btn btn-default btn-flat">Profile</h:commandLink>
-									 
-									 
-									 <h:commandLink rendered="#{connexionBean.candidat}"
-									action="CandidatProfile"
-									 class="btn btn-default btn-flat">Profile</h:commandLink>
-									 
-									 
-									 <h:commandLink rendered="#{connexionBean.entreprise}"
-									action="EntrepriseProfile"
-									 class="btn btn-default btn-flat">Profile</h:commandLink>
-									 
-									 </h:form>
+									<h:form>
+										<h:commandLink rendered="#{connexionBean.admin}"
+											action="AdminProfile" class="btn btn-default btn-flat">Profile</h:commandLink>
+
+
+										<h:commandLink rendered="#{connexionBean.candidat}"
+											action="CandidatProfile" class="btn btn-default btn-flat">Profile</h:commandLink>
+
+
+										<h:commandLink rendered="#{connexionBean.entreprise}"
+											action="EntrepriseProfile" class="btn btn-default btn-flat">Profile</h:commandLink>
+
+									</h:form>
 								</div>
 								<div class="pull-right">
 

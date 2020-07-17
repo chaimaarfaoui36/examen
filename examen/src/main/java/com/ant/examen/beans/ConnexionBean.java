@@ -29,10 +29,7 @@ public class ConnexionBean {
 
 	}
 
-	public boolean isAdmin() {
-		return admin;
-	}
-
+	
 	public String getUserConnected() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
@@ -103,6 +100,25 @@ public class ConnexionBean {
 	}
 
 	public boolean isCandidat() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		for (GrantedAuthority authority : authentication.getAuthorities()) {
+			if (authority.getAuthority().equalsIgnoreCase("ROLE_ADMIN")) {
+				admin = true;
+				candidat = false;
+				entreprise = false;
+				role = "Adminsitratuer";
+			} else if (authority.getAuthority().equalsIgnoreCase("ROLE_CANDIDAT")) {
+				admin = false;
+				candidat = true;
+				entreprise = false;
+				role = "Candidat";
+			} else if (authority.getAuthority().equalsIgnoreCase("ROLE_ENTREPRISE")) {
+				admin = false;
+				candidat = false;
+				entreprise = true;
+				role = "Entreprise";
+			}
+		}
 		return candidat;
 	}
 
@@ -130,6 +146,10 @@ public class ConnexionBean {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+
+	public boolean isAdmin() {
+		return admin;
 	}
 
 }

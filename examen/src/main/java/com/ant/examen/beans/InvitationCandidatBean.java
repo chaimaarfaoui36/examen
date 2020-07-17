@@ -13,32 +13,34 @@ import org.primefaces.PrimeFaces;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.ant.examen.entities.Entreprise;
+import com.ant.examen.entities.Candidat;
 import com.ant.examen.entities.Invitation;
 import com.ant.examen.model.MessageResponse;
-import com.ant.examen.services.EntrepriseService;
+import com.ant.examen.services.CandidatService;
 import com.ant.examen.services.InvitationService;
 
 @ManagedBean
 @ViewScoped
-public class InvitationEntrepriseBean {
+public class InvitationCandidatBean {
 
 	private InvitationService invitationService = new InvitationService();
 	private List<Invitation> invitations = new ArrayList<>();
-	private EntrepriseService entrepriseService = new EntrepriseService();
+	private List<Invitation> notifications = new ArrayList<>();
+	private CandidatService candidatService = new CandidatService();
 	private Invitation invitation = new Invitation();
 
 	@PostConstruct
 	public void init() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		Entreprise entreprise = entrepriseService.findByEmail(authentication.getName());
-		invitations = invitationService.findByEntreprise(entreprise);
+		Candidat candidat = candidatService.findByEmail(authentication.getName());
+		invitations = invitationService.findByCandidat(candidat);
+		notifications = invitationService.findByCandidatAndEtat(candidat, "En attente");
 	}
 
 	public void refuser() {
 		try {
-			invitation.setEtat("Annulée");
+			invitation.setEtat("Refusée");
 			MessageResponse result = invitationService.update(invitation);
 			if (result.isSuccess()) {
 				FacesContext.getCurrentInstance().addMessage(null,
@@ -57,16 +59,15 @@ public class InvitationEntrepriseBean {
 
 	}
 
-	public void inviter() {
+	public void accepter() {
 
-		boolean valid = false;
 		try {
+			invitation.setEtat("Acceptée");
 			MessageResponse result = invitationService.update(invitation);
 			if (result.isSuccess()) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", result.getMessage()));
-				valid = true;
-				invitation = new Invitation();
+
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_WARN, "Attention", result.getMessage()));
@@ -77,7 +78,7 @@ public class InvitationEntrepriseBean {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Opération non effectuée"));
 			e.printStackTrace();
 		}
-		PrimeFaces.current().ajax().addCallbackParam("valid", valid);
+
 	}
 
 	public List<Invitation> getInvitations() {
@@ -94,6 +95,14 @@ public class InvitationEntrepriseBean {
 
 	public void setInvitation(Invitation invitation) {
 		this.invitation = invitation;
+	}
+
+	public List<Invitation> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Invitation> notifications) {
+		this.notifications = notifications;
 	}
 
 }

@@ -91,6 +91,16 @@
   <navigation-case>
    <from-outcome>Invitation</from-outcome>
    <to-view-id>/entreprise/Invitation.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>MesInvitation</from-outcome>
+   <to-view-id>/candidat/MesInvitation.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>Index</from-outcome>
+   <to-view-id>/shared/Index.xhtml</to-view-id>
    <redirect></redirect>
   </navigation-case>
  </navigation-rule>

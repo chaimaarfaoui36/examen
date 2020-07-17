@@ -28,6 +28,15 @@
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu tree" data-widget="tree">
+				
+					<li class=" treeview"><h:commandLink
+								action="Index">
+								<i class="fa fa-dashboard"></i>
+								<span>Acceuil</span>
+
+							</h:commandLink></li>
+				
+				
 					<h:panelGroup rendered="#{connexionBean.admin}">
 
 						<li class=" treeview"><a href="#"> <i class="fa fa-users"></i>
@@ -46,7 +55,7 @@
 
 
 						<li class=" treeview"><a href="#"> <i
-								class="fa fa-tachometer"></i> <span>Gestion des questions</span>
+								class="fa fa-question"></i> <span>Gestion des questions</span>
 								<span class="pull-right-container"> <i
 									class="fa fa-angle-left pull-right"></i>
 							</span>
@@ -60,7 +69,7 @@
 
 
 						<li class=" treeview"><h:commandLink action="Theme">
-								<i class="fa fa-tachometer"></i>
+								<i class="fa fa-book"></i>
 								<span>Gestion des Thèmes</span>
 
 							</h:commandLink></li>
@@ -72,7 +81,7 @@
 
 
 						<li class=" treeview"><a href="#"> <i
-								class="fa fa-tachometer"></i> <span>Gestion des examens</span> <span
+								class="fa fa-commenting-o"></i> <span>Gestion des examens</span> <span
 								class="pull-right-container"> <i
 									class="fa fa-angle-left pull-right"></i>
 							</span>
@@ -87,7 +96,7 @@
 
 						<li class=" treeview"><h:commandLink
 								action="ParticipationExamen">
-								<i class="fa fa-tachometer"></i>
+								<i class="fa fa-comments"></i>
 								<span>Participations</span>
 
 							</h:commandLink></li>
@@ -95,7 +104,7 @@
 
 						<li class=" treeview"><h:commandLink
 								action="Invitation">
-								<i class="fa fa-tachometer"></i>
+								<i class="fa  fa-user-plus"></i>
 								<span>Invitations</span>
 
 							</h:commandLink></li>
@@ -105,15 +114,23 @@
 					<h:panelGroup rendered="#{connexionBean.candidat}">
 
 						<li class=" treeview"><h:commandLink action="ExamenDispo">
-								<i class="fa fa-tachometer"></i>
+								<i class="fa  fa-file-code-o"></i>
 								<span>Examen en ligne</span>
 
 							</h:commandLink></li>
 
 						<li class=" treeview"><h:commandLink
 								action="MesParticipations">
-								<i class="fa fa-tachometer"></i>
+								<i class="fa fa-comment"></i>
 								<span>Mes participations</span>
+
+							</h:commandLink></li>
+							
+							
+								<li class=" treeview"><h:commandLink
+								action="MesInvitation">
+								<i class="fa fa-user-plus"></i>
+								<span>Mes Invitations</span>
 
 							</h:commandLink></li>
 					</h:panelGroup>

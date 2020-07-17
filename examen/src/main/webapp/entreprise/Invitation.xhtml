@@ -42,9 +42,26 @@
 							</p:column>
 
 
-							<p:column headerText="Opérations" width="10%">
-
-
+							<p:column headerText="Opérations" width="15%">
+								<p:commandLink styleClass="btn btn-warning" style="color:white"
+									title="Editer" process="@this" update="f1:panel"
+									disabled="#{invit.etat != 'En attente'? true: false}"
+									onclick="PF('dlg').show()">
+									<f:setPropertyActionListener value="#{invit}"
+										target="#{invitationEntrepriseBean.invitation}" />
+									<i class="fa  fa-pencil"></i>
+								</p:commandLink>
+								<p:spacer width="10"></p:spacer>
+								<p:commandLink styleClass="btn btn-danger" style="color:white"
+									title="Rejeter" process="@this"
+									disabled="#{invit.etat != 'En attente'? true: false}"
+									action="#{invitationEntrepriseBean.refuser()}" update="tab">
+									<f:setPropertyActionListener value="#{invit}"
+										target="#{invitationEntrepriseBean.invitation}" />
+									<i class="fa  fa-ban"></i>
+									<p:confirm header="Confirmation"
+										message="Vous etes sur d'annuler cette invitation??"></p:confirm>
+								</p:commandLink>
 							</p:column>
 
 
@@ -53,7 +70,39 @@
 
 
 
+						<p:dialog header="Invitation" widgetVar="dlg" modal="true"
+							resizable="false">
 
+							<h:panelGrid columns="2" id="panel">
+								<h:outputText value="Date Invitation" />
+
+								<p:calendar pattern="dd/MM/yyyy HH:mm"
+									value="#{invitationEntrepriseBean.invitation.dateInvitation}"
+									required="true" requiredMessage="Date Invitation réquis"></p:calendar>
+
+								<p:commandButton value="Inviter"
+									action="#{invitationEntrepriseBean.inviter()}" update="tab"
+									oncomplete="validForm(xhr, status, args)"></p:commandButton>
+
+
+								<p:commandButton value="Annuler" onclick="PF('dlg').hide()"
+									process="@this"></p:commandButton>
+
+							</h:panelGrid>
+
+						</p:dialog>
+
+						<script type="text/javascript">
+    function validForm(xhr, status, args) {
+        if(args.validationFailed || !args.valid) {
+            PF('dlg').jq.effect("shake", {times:5}, 100);
+        }
+        else {
+            PF('dlg').hide();
+            $('#loginLink').fadeOut();
+        }
+    }
+</script>
 
 
 

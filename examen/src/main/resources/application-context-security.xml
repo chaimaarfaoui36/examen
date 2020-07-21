@@ -18,6 +18,8 @@
 		<security:intercept-url
 			pattern="/faces/entreprise/**" access="hasRole('ROLE_ENTREPRISE')" />
 
+<security:intercept-url pattern="/faces/shared/**" access="isAuthenticated()"/>
+
 		<security:form-login
 			login-processing-url="/faces/j_spring_security_check"
 			login-page="/faces/auth/Login.xhtml"

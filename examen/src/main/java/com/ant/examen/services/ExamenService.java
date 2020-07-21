@@ -1,5 +1,6 @@
 package com.ant.examen.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.ant.examen.dao.ExamenDao;
 import com.ant.examen.dao.QuestionExamenDao;
+import com.ant.examen.dao.ThemeDao;
 import com.ant.examen.entities.Entreprise;
 import com.ant.examen.entities.Examen;
 import com.ant.examen.entities.Question;
@@ -16,9 +18,10 @@ import com.ant.examen.entities.QuestionExamen;
 import com.ant.examen.entities.QuestionExamenId;
 import com.ant.examen.entities.Theme;
 import com.ant.examen.model.MessageResponse;
+import com.ant.examen.model.StatModel;
 
 public class ExamenService {
-
+	private ThemeDao themeDao = new ThemeDao();
 	private ExamenDao examenDao = new ExamenDao();
 	private QuestionExamenDao questionExamenDao = new QuestionExamenDao();
 
@@ -74,11 +77,11 @@ public class ExamenService {
 		Criterion crit2 = Restrictions.eq("examen", examen);
 		Criterion crit3 = Restrictions.and(crit, crit2);
 		List<QuestionExamen> list = questionExamenDao.findByCriteria(crit3);
-	
+
 		if (list.isEmpty()) {
 			QuestionExamen questionExamen = new QuestionExamen();
 			QuestionExamenId questionExamenId = new QuestionExamenId();
-			
+
 			questionExamenId.setExamensId(examen.getId());
 			questionExamenId.setQuestionsId(question.getId());
 			questionExamen.setId(questionExamenId);
@@ -119,11 +122,34 @@ public class ExamenService {
 			return examenDao.findByTheme(newListTheme);
 		} else if (!stes.isEmpty() && themes.isEmpty()) {
 			return examenDao.findBySte(newListSte);
-		}  else if (!stes.isEmpty() && !themes.isEmpty()) {
+		} else if (!stes.isEmpty() && !themes.isEmpty()) {
 			return examenDao.findByThemeAndSte(newListTheme, newListSte);
 		} else {
 			return findDisponibleExamen();
 		}
 	}
 
+	public List<Examen> findByMonth(int month) {
+		return examenDao.findByMonth(month);
+
+	}
+
+	public List<Examen> findByMonth(int month, Entreprise entreprise) {
+		return examenDao.findByMonth(month, entreprise);
+
+	}
+
+	public StatModel findThemeExamen(Entreprise entreprise) {
+		StatModel statModel = new StatModel();
+		List<Number> values = new ArrayList<>();
+		List<String> labels = new ArrayList<>();
+		List<Theme> themes = themeDao.findAll();
+		for(Theme t: themes) {
+		values.add(examenDao.findByTheme(t, entreprise).size())	;
+		labels.add(t.getLibelle());
+		}
+		statModel.setLabels(labels);
+		statModel.setValues(values);
+		return statModel;
+	}
 }

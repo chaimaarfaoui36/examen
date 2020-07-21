@@ -47,4 +47,9 @@ public class InvitationService {
 		// TODO Auto-generated method stub
 		return invitationDao.findByCandidatAndEtat(candidat, etat);
 	}
+	
+	public List<Invitation> findByMonth(int month, Entreprise entreprise) {
+	return invitationDao.findByMonth(month, entreprise);
+	}
+	
 }

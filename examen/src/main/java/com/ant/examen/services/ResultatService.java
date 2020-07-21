@@ -78,9 +78,9 @@ public class ResultatService {
 		result.setReponseCorrect(count);
 		result.setTotalReponse(list.size());
 
-		if (res <= 25) {
+		if (res < 25) {
 			result.setMessage("Très Faible");
-		} else if (res > 25 && res <= 50) {
+		} else if (res >= 25 && res <= 50) {
 			result.setMessage("Faible");
 		} else if (res > 50 && res <= 60) {
 			result.setMessage("Passable");
@@ -89,7 +89,7 @@ public class ResultatService {
 		} else if (res >= 70 && res <= 80) {
 			result.setMessage("Très Bien");
 		} else {
-			result.setMessage("Excilent");
+			result.setMessage("Excelent");
 		}
 
 		return result;
